@@ -6,7 +6,9 @@ import hestia.msStore.exeptions.ResourceNotFoundException;
 import hestia.msStore.model.Lista;
 import hestia.msStore.model.Product;
 import hestia.msStore.payload.ListaDto;
+import hestia.msStore.payload.ListaResponse;
 import hestia.msStore.payload.ProductDto;
+import hestia.msStore.payload.ProductResponse;
 import hestia.msStore.repository.CategoryRepository;
 import hestia.msStore.repository.ListaRepository;
 import hestia.msStore.repository.ProductRepository;
@@ -15,11 +17,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 public class ListaServiceIMPL implements ListaService {
@@ -46,20 +47,61 @@ public class ListaServiceIMPL implements ListaService {
         return listaRepository.findAll()
                 .stream()
                 .map(ClassMapper.INTANCE::listaToDto)
-                .collect(Collectors.toList());
+                .collect(toList());
     }
 
     @Override
     public List<ListaDto> findAllListaByName(String listaName) {
-        Optional<Lista> lista = listaRepository.findAllByListaName(listaName);
-
+        var lista = listaRepository.findAllByListaName(listaName);
         if (lista.isEmpty()) {
             throw new ResourceNotFoundException("No Lista found with name: " + listaName);
         }
 
         return lista.stream()
                 .map(ClassMapper.INTANCE::listaToDto)
-                .collect(Collectors.toList());
+                .collect(toList());
+    }
+
+    @Override
+    public List<ListaResponse> findAllListaComparator() {
+        var searchListas = listaRepository.findAll();
+
+        Map<String, List<ListaResponse>> productGroups = new HashMap<>();
+
+        for (Lista lista : searchListas) {
+            for (Product product : lista.getProducts()) {
+                String productName = product.getProductName();
+
+                // Obtém a lista existente ou cria uma nova se não existir
+
+                List<ListaResponse> productLists = productGroups.computeIfAbsent(productName, k -> new ArrayList<>());
+
+                // Verifica se já existe uma ListaResponse com o mesmo nome
+                boolean listaExists = productLists.stream()
+                        .anyMatch(list -> list.getListaName().equals(productName));
+
+                // Cria uma nova ListaResponse se não existir
+                if (!listaExists) {
+                    var listaResponse = ClassMapper.INTANCE.responseToLista(lista);
+                    listaResponse.setListaName(productName);
+                    productLists.add(listaResponse);
+                }
+
+                var productResponse = ClassMapper.INTANCE.responseToProduct(product);
+
+                if (lista.getListaName().equals(productName)) {
+                    // Adiciona o ProductResponse à ListaResponse existente
+                    productLists.stream()
+                            .filter(list -> list.getListaName().equals(productName))
+                            .findFirst()
+                            .ifPresent(listaResponse -> listaResponse.getProducts().add(productResponse));
+                }
+            }
+        }
+
+        return productGroups.values().stream()
+                .flatMap(List::stream)
+                .collect(toList());
     }
 
     @Override

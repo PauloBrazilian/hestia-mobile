@@ -1,6 +1,7 @@
 package hestia.msStore.controller;
 
 import hestia.msStore.payload.ListaDto;
+import hestia.msStore.payload.ListaResponse;
 import hestia.msStore.payload.ProductDto;
 import hestia.msStore.service.ListaServiceIMPL;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,13 @@ public class ListaController {
     }
 
     @GetMapping("/{listaName}")
-    public ResponseEntity<List<ListaDto>> findAllListaByName(@PathVariable(value = "listaName") String listaName, @RequestBody(required = false) ListaDto listaDto) {
+    public ResponseEntity<List<ListaDto>> findAllListaByName(@PathVariable(value = "listaName") String listaName) {
         return new ResponseEntity<>(serviceIMPL.findAllListaByName(listaName), HttpStatus.OK);
+    }
+
+    @GetMapping("/comparator")
+    public ResponseEntity<List<ListaResponse>> findAllListaComparator(){
+        return new ResponseEntity<>(serviceIMPL.findAllListaComparator(), HttpStatus.OK);
     }
 
     @PostMapping

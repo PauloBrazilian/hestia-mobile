@@ -8,4 +8,6 @@ import java.util.Optional;
 
 public interface ListaRepository extends JpaRepository<Lista, Integer> {
     Optional<Lista> findAllByListaName(String listaName);
+
+//    List<Lista> findAllByProductInListaName(List<Lista> seachListas);
 }

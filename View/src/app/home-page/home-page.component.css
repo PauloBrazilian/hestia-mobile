@@ -1,0 +1,14 @@
+#ScrollCategoriaList,
+#ScrollCategoriaList::-webkit-scrollbar {
+    display: none;
+    scrollbar-width: none;
+}
+
+#ScrollCategoriaLeft,
+#ScrollCategoriaRight {
+    cursor: pointer;
+}
+
+#CardCriaLista {
+    background: #96BB7C;
+}

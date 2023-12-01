@@ -20,6 +20,7 @@ import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.partitioningBy;
 import static java.util.stream.Collectors.toList;
 
 @Service
@@ -63,45 +64,34 @@ public class ListaServiceIMPL implements ListaService {
     }
 
     @Override
-    public List<ListaResponse> findAllListaComparator() {
-        var searchListas = listaRepository.findAll();
+    public List<ListaResponse> findbyListaComparator(int listaId) {
+        var searchListas = listaRepository.findById(listaId).orElseThrow(
+                () -> new ResourceNotFoundException("Lista", "id", listaId));
 
-        Map<String, List<ListaResponse>> productGroups = new HashMap<>();
+        Map<String, ListaResponse> productGroups = new HashMap<>();
 
-        for (Lista lista : searchListas) {
-            for (Product product : lista.getProducts()) {
-                String productName = product.getProductName();
+        for (Product product : searchListas.getProducts()) {
+            var productName = product.getProductName();
 
-                // Obtém a lista existente ou cria uma nova se não existir
-
-                List<ListaResponse> productLists = productGroups.computeIfAbsent(productName, k -> new ArrayList<>());
-
-                // Verifica se já existe uma ListaResponse com o mesmo nome
-                boolean listaExists = productLists.stream()
-                        .anyMatch(list -> list.getListaName().equals(productName));
-
-                // Cria uma nova ListaResponse se não existir
-                if (!listaExists) {
-                    var listaResponse = ClassMapper.INTANCE.responseToLista(lista);
-                    listaResponse.setListaName(productName);
-                    productLists.add(listaResponse);
-                }
-
+            if (productGroups.containsKey(productName)) {
+                var listaResponse = productGroups.get(productName);
                 var productResponse = ClassMapper.INTANCE.responseToProduct(product);
 
-                if (lista.getListaName().equals(productName)) {
-                    // Adiciona o ProductResponse à ListaResponse existente
-                    productLists.stream()
-                            .filter(list -> list.getListaName().equals(productName))
-                            .findFirst()
-                            .ifPresent(listaResponse -> listaResponse.getProducts().add(productResponse));
+                if (listaResponse.getProducts() == null) {
+                    listaResponse.setProducts(new ArrayList<>());
                 }
+
+                listaResponse.getProducts().add(productResponse);
+            } else {
+                var listaResponse = new ListaResponse();
+                listaResponse.setListaName(productName);
+                var productResponse = ClassMapper.INTANCE.responseToProduct(product);
+                listaResponse.setProducts(new ArrayList<>(List.of(productResponse)));
+                productGroups.put(productName, listaResponse);
             }
         }
 
-        return productGroups.values().stream()
-                .flatMap(List::stream)
-                .collect(toList());
+        return new ArrayList<>(productGroups.values());
     }
 
     @Override

@@ -29,9 +29,9 @@ public class ListaController {
         return new ResponseEntity<>(serviceIMPL.findAllListaByName(listaName), HttpStatus.OK);
     }
 
-    @GetMapping("/comparator")
-    public ResponseEntity<List<ListaResponse>> findAllListaComparator(){
-        return new ResponseEntity<>(serviceIMPL.findAllListaComparator(), HttpStatus.OK);
+    @GetMapping("/comparator/{listaId}")
+    public ResponseEntity<List<ListaResponse>> findbyListaComparator(@PathVariable int listaId){
+        return new ResponseEntity<>(serviceIMPL.findbyListaComparator(listaId), HttpStatus.OK);
     }
 
     @PostMapping

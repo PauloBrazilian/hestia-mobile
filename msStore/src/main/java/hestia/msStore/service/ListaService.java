@@ -10,7 +10,7 @@ public interface ListaService {
     public List<ListaDto> findAllListas();
     public List<ListaDto> findAllListaByName(String listaName);
 
-    public List<ListaResponse> findAllListaComparator();
+    public List<ListaResponse> findbyListaComparator(int listaId);
 
     public ListaDto createLista(ListaDto listaDto);
 

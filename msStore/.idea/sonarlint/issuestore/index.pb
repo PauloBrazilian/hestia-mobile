@@ -19,3 +19,5 @@ n
 >src/main/java/hestia/msStore/repository/ProductRepository.java,7\1\719fd87aa20e4b1016a1825e8f56f321f09d8da4
 l
 <src/main/java/hestia/msStore/controller/ListaController.java,c\6\c6dd5ba9410d9c12a5403db0679934a53fbb23b8
+_
+/src/main/java/hestia/msStore/model/Product.java,7\1\7178df0a10e521418dbf8ddcf08f9e231be2456b

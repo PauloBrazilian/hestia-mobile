@@ -1,6 +1,25 @@
-server:
-  port: 8080
-
 spring:
-  application:
-    name: gateway
+  cloud:
+    gateway:
+      routes:
+        - id: msauthorization
+          uri: lb://ms-authorization
+          predicates:
+            - Path=/oauth/**
+          filters:
+            - LoggingFilter
+            - GlobalErrorFilter
+        - id: mspersons
+          uri: lb://ms-persons
+          predicates:
+            - Path=/persons/**
+          filters:
+            - LoggingFilter
+            - GlobalErrorFilter
+        - id: msstore
+          uri: lb://ms-store
+          predicates:
+            - Path=/store/**
+          filters:
+            - LoggingFilter
+            - GlobalErrorFilter

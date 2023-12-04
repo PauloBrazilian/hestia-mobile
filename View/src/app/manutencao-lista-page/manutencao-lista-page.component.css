@@ -1,0 +1,31 @@
+/* All */
+*{
+    margin: 0;
+}
+
+/* Div maior */
+.shadow-sm {
+    box-shadow: var(--bs-box-shadow-sm)!important;
+    margin-top: 1rem;
+}
+
+.mat-mdc-list-base {
+    --mdc-list-list-item-one-line-container-height: 1.5rem;
+}
+
+mat-list{
+    /* border: 2px solid red;
+    margin: 0 */
+}
+
+/* Dentro da div */
+mat-list-item{
+    /* border: 2px solid blue;
+    height: -2px; */
+}
+
+
+b, strong {
+    font-weight: inherit;
+    font-size: 5vh;
+}

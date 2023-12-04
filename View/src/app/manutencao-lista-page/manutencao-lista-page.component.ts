@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
 import { Listas } from '../model/listas';
+import { MsStoreService } from '../service/msStore/ms-store.service';
 
 
 @Component({
@@ -11,13 +11,14 @@ import { Listas } from '../model/listas';
 export class ManutencaoListaPageComponent implements OnInit {
 
   listas: Listas[] = [
-    {listaId: 1, listaName: 'Name', data: '2023-12-04', products: []}
+    {listaId: 1, listaName: 'Paulo', data: '2023-12-04', products: []}
   ];
-
-  displayedColumns: string[] = ['nome', 'data', 'products', 'actions'];
-
-  constructor() { }
+  displayedColumns: string[] = ['listaName', 'data', 'actions'];
+  
+  constructor(private msStore: MsStoreService) {         
+  }
 
   ngOnInit(): void {
+    this.listas = this.msStore.findAllListas();
   }
 }

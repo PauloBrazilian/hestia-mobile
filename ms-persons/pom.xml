@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>hestia</groupId>
-	<artifactId>msPersons</artifactId>
+	<artifactId>ms-persons</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>msPersons</name>
 	<description>Prj-Hestia</description>

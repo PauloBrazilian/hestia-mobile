@@ -1,0 +1,20 @@
+
+     
+
+button.BtnSalvar,
+a.BtnSalvar {
+    min-width: 90px;
+}
+
+
+
+/* TELA DE LOGIN  E CADASTRO*/
+body.FundoLogin {
+    background-color: #96BB7C;
+}
+
+div#cardLogin {
+    min-width: 400px;
+    min-height: 400px;
+}
+

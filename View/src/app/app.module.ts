@@ -12,12 +12,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatListModule} from '@angular/material/list';
 import { HttpClientModule } from '@angular/common/http';
+import { AcessoPageComponent } from './acesso-page/acesso-page.component';
+import { CadastroPageComponent } from './cadastro-page/cadastro-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
     ManutencaoListaPageComponent,
+    AcessoPageComponent,
+    CadastroPageComponent,
   ],
   imports: [
     BrowserModule,

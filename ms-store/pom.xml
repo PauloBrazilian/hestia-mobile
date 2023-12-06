@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>hestia</groupId>
-	<artifactId>msStore</artifactId>
+	<artifactId>ms-store</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>msStore</name>
 	<description>Prj-Hestia</description>

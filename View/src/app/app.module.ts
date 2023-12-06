@@ -14,6 +14,8 @@ import {MatListModule} from '@angular/material/list';
 import { HttpClientModule } from '@angular/common/http';
 import { AcessoPageComponent } from './acesso-page/acesso-page.component';
 import { CadastroPageComponent } from './cadastro-page/cadastro-page.component';
+import { CadastrosListaComponent } from './cadastros-lista/cadastros-lista.component';
+import { CompararListaComponent } from './comparar-lista/comparar-lista.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { CadastroPageComponent } from './cadastro-page/cadastro-page.component';
     ManutencaoListaPageComponent,
     AcessoPageComponent,
     CadastroPageComponent,
+    CadastrosListaComponent,
+    CompararListaComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,25 +1,51 @@
+server:
+  port: 8080
+
+logging:
+  level:
+    web: debug
+
 spring:
+  application:
+    name: gateway
   cloud:
     gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
       routes:
-        - id: msauthorization
-          uri: lb://ms-authorization
+        - id: ms-persons
+          uri: http://localhost:8081
           predicates:
-            - Path=/oauth/**
+            - Path=/person/**
           filters:
             - LoggingFilter
-            - GlobalErrorFilter
-        - id: mspersons
-          uri: lb://ms-persons
+
+        - id: ms-persons
+          uri: http://localhost:8081
           predicates:
-            - Path=/persons/**
+            - Path=/personBus/**
           filters:
             - LoggingFilter
-            - GlobalErrorFilter
-        - id: msstore
-          uri: lb://ms-store
+
+        - id: ms-store
+          uri: http://localhost:8082
           predicates:
-            - Path=/store/**
+            - Path=/products/**
           filters:
             - LoggingFilter
-            - GlobalErrorFilter
+
+        - id: ms-store
+          uri: http://localhost:8082
+          predicates:
+            - Path=/lista/**
+          filters:
+            - LoggingFilter
+
+        - id: ms-store
+          uri: http://localhost:8082
+          predicates:
+            - Path=/category/**
+          filters:
+            - LoggingFilter

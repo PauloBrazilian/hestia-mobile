@@ -3,6 +3,7 @@ package prjhestia.gateway;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
+import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
@@ -12,28 +13,20 @@ import java.util.logging.Logger;
 
 
 @Component
-public class LoggingFilter implements GlobalFilter, GatewayFilter {
+public class LoggingFilter extends AbstractGatewayFilterFactory<LoggingFilter.Config> {
 
-    private Logger logger = Logger.getLogger(LoggingFilter.class.getName());
-
-    @Override
-    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        logger.info("Path of the request received -> " + exchange.getRequest().getPath().value());
-        return chain.filter(exchange);
+    public LoggingFilter() {
+        super(Config.class);
     }
 
     @Override
-    public ShortcutType shortcutType() {
-        return GatewayFilter.super.shortcutType();
+    public GatewayFilter apply(Config config) {
+        return (exchange, chain) -> {
+            return chain.filter(exchange);
+        };
     }
 
-    @Override
-    public List<String> shortcutFieldOrder() {
-        return GatewayFilter.super.shortcutFieldOrder();
+    public static class Config {
     }
 
-    @Override
-    public String shortcutFieldPrefix() {
-        return GatewayFilter.super.shortcutFieldPrefix();
-    }
 }

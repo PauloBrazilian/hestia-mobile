@@ -1,0 +1,51 @@
+server:
+  port: 8080
+
+logging:
+  level:
+    web: debug
+
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: ms-persons
+          uri: http://localhost:8081
+          predicates:
+            - Path=/person/**
+          filters:
+            - LoggingFilter
+
+        - id: ms-persons
+          uri: http://localhost:8081
+          predicates:
+            - Path=/personBus/**
+          filters:
+            - LoggingFilter
+
+        - id: ms-store
+          uri: http://localhost:8082
+          predicates:
+            - Path=/products/**
+          filters:
+            - LoggingFilter
+
+        - id: ms-store
+          uri: http://localhost:8082
+          predicates:
+            - Path=/lista/**
+          filters:
+            - LoggingFilter
+
+        - id: ms-store
+          uri: http://localhost:8082
+          predicates:
+            - Path=/category/**
+          filters:
+            - LoggingFilter

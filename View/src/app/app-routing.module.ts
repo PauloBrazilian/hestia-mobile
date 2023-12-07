@@ -16,6 +16,7 @@ const routes: Routes = [
   {path: 'explorar', component: ExplorarPageComponent},
   {path: 'lista/comparar', component: CompararListaComponent},
   {path: 'lista/cadastrar', component: CadastrarListaComponent},
+  {path: 'lista/editar', component: CadastrarListaComponent},
 
 ];
 

@@ -15,3 +15,7 @@ a.nav-link.link-dark {
 a.nav-link.link-dark:hover {
     color: var(--bs-gray-600) !important;
 }
+
+main#Main{
+    background-color: #f8f8f8 !important;
+}

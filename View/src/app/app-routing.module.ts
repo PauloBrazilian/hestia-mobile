@@ -6,6 +6,8 @@ import {ManutencaoListaPageComponent} from "./manutencao-lista-page/manutencao-l
 import {ExplorarPageComponent} from "./explorar-page/explorar-page.component";
 import {CompararListaComponent} from "./comparar-lista/comparar-lista.component";
 import {CadastrarListaComponent} from "./cadastrar-lista/cadastrar-lista.component";
+import {EditarListaComponent} from "./editar-lista/editar-lista.component";
+
 
 
 
@@ -16,7 +18,7 @@ const routes: Routes = [
   {path: 'explorar', component: ExplorarPageComponent},
   {path: 'lista/comparar', component: CompararListaComponent},
   {path: 'lista/cadastrar', component: CadastrarListaComponent},
-  {path: 'lista/editar', component: CadastrarListaComponent},
+  {path: 'lista/editar', component: EditarListaComponent},
 
 ];
 

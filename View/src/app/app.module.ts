@@ -17,6 +17,7 @@ import { CadastroPageComponent } from './cadastro-page/cadastro-page.component';
 import { CadastrosListaComponent } from './cadastros-lista/cadastros-lista.component';
 import { CompararListaComponent } from './comparar-lista/comparar-lista.component';
 import { CadastrarListaComponent } from './cadastrar-lista/cadastrar-lista.component';
+import { EditarListaComponent } from './editar-lista/editar-lista.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { CadastrarListaComponent } from './cadastrar-lista/cadastrar-lista.compo
     CadastrosListaComponent,
     CompararListaComponent,
     CadastrarListaComponent,
+    EditarListaComponent,
   ],
   imports: [
     BrowserModule,

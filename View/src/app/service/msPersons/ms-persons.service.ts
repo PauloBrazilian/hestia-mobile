@@ -8,7 +8,7 @@ import { Person } from 'src/app/entidade/person';
 })
 export class MsPersonsService {
 
-  private readonly API = '/assets/person.json';
+  private readonly API = 'api/lista'
 
   constructor(private httpClient: HttpClient) { }
 

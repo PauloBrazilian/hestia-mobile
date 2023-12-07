@@ -13,10 +13,10 @@
 <body>
 
   <div class="row h-100 g-0">
-    <div id="" class="col-1 col-lg-2 bg-white text-dark h-100 shadow-sm">
+    <div id="" class="col-1 col-lg-2 bg-white text-dark h-100">
       <div class="d-flex flex-column justify-content-between h-100">
         <header class="d-flex flex-column align-items-center px-3 pt-3">
-          <img src="../assets/Logo_W.png" alt="" class="w-100 d-none d-lg-inline px-2">
+          <h1 class="d-none d-lg-inline">Hestia</h1>
           <nav class="nav flex-column w-100 mt-3">
             <a class="nav-link link-dark px-0 active" aria-current="page" routerLink="/index">
               <i class="bi bi-house"></i>
@@ -39,13 +39,16 @@
         <footer class="px-3 pb-3">
           <button type="button" class="btn btn-sm btn-outline-dark w-100">
             <i class="bi bi-x-circle"></i>
-            <span class="d-none d-lg-inline ms-2">Sair</span>
+            <span class="d-none d-lg-inline">Sair</span>
           </button>
         </footer>
       </div>
     </div>
-    <main id="Main" class="col h-100 bg-light overflow-auto d-flex flex-column bg-light px-3 py-2">
-
+    <main class="col h-100 bg-light overflow-auto d-flex flex-column bg-light px-3 py-2">
+      <header>
+        <h1 class="fs-4 fw-bold mb-0">Bem - Vindo !</h1>
+        <h2 class="fs-5 fw-light mb-4">Site para comparação de preços</h2>
+      </header>
 
       <router-outlet></router-outlet>
 

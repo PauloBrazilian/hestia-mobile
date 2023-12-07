@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { delay, first, tap } from 'rxjs';
 import { Listas } from 'src/app/model/listas';
 
 @Injectable({
@@ -9,12 +10,15 @@ export class MsStoreService {
 
   constructor(private httpClient: HttpClient) { }
 
+  private readonly API = 'api/'
 
-  findAllListas(): Listas[]{
-    return[
-      {listaId: 1, listaName: 'Paulo', data: '2023-12-04', products: []}
-    ]
+  findAllListas(){
+    return this.httpClient.get<Listas[]>(this.API)
+      .pipe(
+        first(),
+        delay(5000),
+        tap(Listas => console.log(Listas))
+      );
   }
-
-
+    
 }

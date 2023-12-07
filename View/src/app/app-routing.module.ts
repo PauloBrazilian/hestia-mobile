@@ -1,14 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import {HomePageComponent} from "./home-page/home-page.component";
-import {ManutencaoListaPageComponent} from "./manutencao-lista-page/manutencao-lista-page.component";
-import {ExplorarPageComponent} from "./explorar-page/explorar-page.component";
-import {CompararListaComponent} from "./comparar-lista/comparar-lista.component";
-import {CadastrarListaComponent} from "./cadastrar-lista/cadastrar-lista.component";
-import {EditarListaComponent} from "./editar-lista/editar-lista.component";
-
-
+import {HomePageComponent} from "./pages/home-page/home-page.component";
+import { ManutencaoListaPageComponent } from './pages/manutencao-lista-page/manutencao-lista-page.component'; 
+import {ExplorarPageComponent} from "./pages/explorar-page/explorar-page.component";
+import {CompararListaComponent} from "./pages/comparar-lista/comparar-lista.component";
+import {CadastrarListaComponent} from "./pages/cadastrar-lista/cadastrar-lista.component";
+import {EditarListaComponent} from "./pages/editar-lista/editar-lista.component";
 
 
 const routes: Routes = [

@@ -8,7 +8,7 @@ import java.util.List;
 public interface ListaService {
 
     public List<ListaDto> findAllListas();
-    public List<ListaDto> findAllListaByName(String listaName);
+    public List<ListaDto> findAllListaById(int listaId);
 
     public List<ListaResponse> findbyListaComparator(int listaId);
 

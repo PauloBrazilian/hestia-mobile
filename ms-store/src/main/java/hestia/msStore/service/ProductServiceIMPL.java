@@ -37,11 +37,11 @@ public class ProductServiceIMPL implements ProductsService {
     }
 
     @Override
-    public List<ProductDto> findAllProductByName(String productName) {
-        List<Product> products = productRepository.findAllByProductName(productName);
+    public List<ProductDto> findAllProductById(int productId) {
+        Optional<Product> products = productRepository.findById(productId);
 
         if (products.isEmpty()) {
-            throw new ResourceNotFoundException("No products found with name: " + productName);
+            throw new ResourceNotFoundException("No products found with name: " + productId);
         }
 
         return products.stream()

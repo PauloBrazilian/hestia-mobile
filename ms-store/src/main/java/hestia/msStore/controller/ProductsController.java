@@ -23,9 +23,9 @@ public class ProductsController {
         return new ResponseEntity<>(serviceIMPL.createProduct(productDto), HttpStatus.CREATED);
     }
 
-    @GetMapping("/{productName}")
-    public ResponseEntity<List<ProductDto>> findAllProductByName(@PathVariable(value = "productName") String productName, @RequestBody(required = false) ProductDto productDto) {
-        List<ProductDto> products = serviceIMPL.findAllProductByName(productName);
+    @GetMapping("/{productId}")
+    public ResponseEntity<List<ProductDto>> findAllProductById(@PathVariable(value = "productId") int productId, @RequestBody(required = false) ProductDto productDto) {
+        List<ProductDto> products = serviceIMPL.findAllProductById(productId);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 

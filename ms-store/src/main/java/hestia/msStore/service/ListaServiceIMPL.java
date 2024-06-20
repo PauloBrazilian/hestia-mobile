@@ -52,10 +52,10 @@ public class ListaServiceIMPL implements ListaService {
     }
 
     @Override
-    public List<ListaDto> findAllListaByName(String listaName) {
-        var lista = listaRepository.findAllByListaName(listaName);
+    public List<ListaDto> findAllListaById(int listaId) {
+        var lista = listaRepository.findById(listaId);
         if (lista.isEmpty()) {
-            throw new ResourceNotFoundException("No Lista found with name: " + listaName);
+            throw new ResourceNotFoundException("No Lista found with name: " + listaId);
         }
 
         return lista.stream()

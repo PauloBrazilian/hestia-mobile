@@ -7,34 +7,17 @@ import hestia.msStore.payload.ListaResponse;
 import hestia.msStore.payload.ProductDto;
 import hestia.msStore.payload.ProductResponse;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
-
-import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface ClassMapper {
 
-
-    ClassMapper INTANCE = Mappers.getMapper(ClassMapper.class);
-
-    @Mapping(source = "productName", target = "productName")
-    @Mapping(source = "description", target = "description")
-    @Mapping(source = "imgUrl", target = "imgUrl")
-    @Mapping(source = "price", target = "price")
-    @Mapping(source = "category", target = "categories")
     ProductDto productToDto(Product product);
 
-    @Mapping(source = "productName", target = "productName")
-    @Mapping(source = "description", target = "description")
-    @Mapping(source = "imgUrl", target = "imgUrl")
-    @Mapping(source = "price", target = "price")
-    @Mapping(source = "categories", target = "category")
     Product dtoToProduct(ProductDto productDto);
 
-   ProductResponse responseToProduct(Product product);
+    ProductResponse responseToProduct(Product product);
 
-   Product  productToResponse(ProductResponse productResponse);
+    Product productToResponse(ProductResponse productResponse);
 
     ListaDto listaToDto(Lista lista);
 

@@ -5,18 +5,20 @@ import hestia.msStore.exeptions.ProductAPIException;
 import hestia.msStore.exeptions.ResourceNotFoundException;
 import hestia.msStore.model.Category;
 import hestia.msStore.model.Product;
-import hestia.msStore.payload.ProductDto;
 import hestia.msStore.repository.CategoryRepository;
 import hestia.msStore.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceIMPL implements ProductsService {
+
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
     private final ClassMapper mapper;
@@ -29,11 +31,8 @@ public class ProductServiceIMPL implements ProductsService {
     }
 
     @Override
-    public List<ProductDto> findAllProducts(){
-        return productRepository.findAll()
-                .stream()
-                .map(product -> ClassMapper.INTANCE.productToDto(product))
-                .collect(Collectors.toList());
+    public List<Product> findAllProducts() {
+        return new ArrayList<>(productRepository.findAll());
     }
 
     @Override
@@ -49,25 +48,33 @@ public class ProductServiceIMPL implements ProductsService {
     }
 
     @Override
-    public ProductDto createProduct(ProductDto productDto) {
-        var product = ClassMapper.INTANCE.dtoToProduct(productDto);
-        var categories = getCategoryById(productDto.getCategories());
-        product.setCategory(categories);
-        productRepository.save(product);
-        return ClassMapper.INTANCE.productToDto(product);
+    public Product createProduct(Product product) {
+        var newProduct = Product.builder()
+                .productName(product.getProductName())
+                .description(product.getDescription())
+                .imgUrl(product.getImgUrl())
+                .price(product.getPrice())
+                .category(getCategoryById(product.getCategory()))
+                .build();
+
+        return productRepository.save(newProduct);
     }
 
 
     @Override
-    public ProductDto updateProduct(int productId, ProductDto productDto) {
+    public Product updateProduct(int productId, Product product) {
         var search = productRepository.findById(productId);
 
         if (search.isPresent()) {
-            var product = ClassMapper.INTANCE.dtoToProduct(productDto);
-            var categories = getCategoryById(productDto.getCategories());
-            product.setCategory(categories);
-            productRepository.save(product);
-            return ClassMapper.INTANCE.productToDto(product);
+            var newProduct = Product.builder()
+                    .productName(product.getProductName())
+                    .description(product.getDescription())
+                    .imgUrl(product.getImgUrl())
+                    .price(product.getPrice())
+                    .category(getCategoryById(product.getCategory()))
+                    .build();
+
+            return productRepository.save(newProduct);
         } else {
             throw new ProductAPIException(HttpStatus.BAD_REQUEST, "Product not found");
         }
@@ -77,9 +84,9 @@ public class ProductServiceIMPL implements ProductsService {
     public void deleteProductById(int productId) {
         var search = productRepository.findById(productId);
 
-        if (search.isPresent()){
+        if (search.isPresent()) {
             productRepository.deleteById(productId);
-        }else {
+        } else {
             throw new ProductAPIException(HttpStatus.BAD_REQUEST, "Product not Exist");
         }
 
@@ -90,11 +97,7 @@ public class ProductServiceIMPL implements ProductsService {
     public Category getCategoryById(Category category) {
         if (category != null) {
             Optional<Category> existingCategory = categoryRepository.findByCategoryName(category.getCategoryName());
-            if (existingCategory.isPresent()) {
-                return existingCategory.get();
-            } else {
-                return categoryRepository.save(category);
-            }
+            return existingCategory.orElseGet(() -> categoryRepository.save(category));
         } else {
             throw new ProductAPIException(HttpStatus.BAD_REQUEST, "Category is Null");
         }

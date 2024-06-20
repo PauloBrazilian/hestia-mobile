@@ -1,11 +1,9 @@
 package hestia.msStore.service;
 
-import hestia.msStore.config.ClassMapper;
 import hestia.msStore.exeptions.ProductAPIException;
 import hestia.msStore.exeptions.ResourceNotFoundException;
 import hestia.msStore.model.Category;
 import hestia.msStore.model.Product;
-import hestia.msStore.payload.ProductDto;
 import hestia.msStore.repository.CategoryRepository;
 import hestia.msStore.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class CategoryServiceIMPL implements CategoryService{
+public class CategoryServiceIMPL implements CategoryService {
 
     private final CategoryRepository categoryRepository;
 
@@ -29,19 +27,18 @@ public class CategoryServiceIMPL implements CategoryService{
     }
 
     @Override
-    public List<ProductDto> findAllCategoryByName(String categoryName) {
+    public List<Product> findAllCategoryByName(String categoryName) {
         List<Category> categoryList = categoryRepository.findAllByCategoryName(categoryName);
 
         if (categoryList.isEmpty()) {
             throw new ResourceNotFoundException("No categories found with name: " + categoryName);
         }
 
-        List<ProductDto> productDtoList = new ArrayList<>();
+        List<Product> productDtoList = new ArrayList<>();
 
         for (Category category : categoryList) {
             List<Product> productList = getProductyById(category);
-            List<ProductDto> categoryProductDtos = productList.stream()
-                    .map(ClassMapper.INTANCE::productToDto)
+            List<Product> categoryProductDtos = productList.stream()
                     .toList();
 
             productDtoList.addAll(categoryProductDtos);

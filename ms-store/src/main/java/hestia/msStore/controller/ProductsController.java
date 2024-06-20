@@ -20,8 +20,8 @@ public class ProductsController {
     private ProductServiceIMPL serviceIMPL;
 
     @PostMapping("/creating")
-    public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto){
-        return new ResponseEntity<>(serviceIMPL.createProduct(productDto), HttpStatus.CREATED);
+    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
+        return new ResponseEntity<>(serviceIMPL.createProduct(product), HttpStatus.CREATED);
     }
 
     @GetMapping("/{productId}")
@@ -31,21 +31,19 @@ public class ProductsController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ProductDto>> findAllProducts() {
+    public ResponseEntity<List<Product>> findAllProducts() {
         return new ResponseEntity<>(serviceIMPL.findAllProducts(), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{productId}")
-    public ResponseEntity<String> deleteProductById(@PathVariable(value = "productId") int productId){
-        serviceIMPL.deleteProductById(productId);
-        return new ResponseEntity<>("Product deleted Successfully",HttpStatus.OK);
-    }
-
     @PutMapping("/{productId}")
-    public ResponseEntity<ProductDto> updateProduct(@PathVariable(value = "productId") int productId, @RequestBody @Valid ProductDto productDto){
-        return new ResponseEntity<>(serviceIMPL.updateProduct(productId,productDto),HttpStatus.OK);
+    public ResponseEntity<Product> updateProduct(@PathVariable(value = "productId") int productId, @RequestBody @Valid Product product) {
+        return new ResponseEntity<>(serviceIMPL.updateProduct(productId, product), HttpStatus.OK);
     }
 
-
+    @DeleteMapping("/{productId}")
+    public ResponseEntity<String> deleteProductById(@PathVariable(value = "productId") int productId) {
+        serviceIMPL.deleteProductById(productId);
+        return new ResponseEntity<>("Product deleted Successfully", HttpStatus.OK);
+    }
 
 }

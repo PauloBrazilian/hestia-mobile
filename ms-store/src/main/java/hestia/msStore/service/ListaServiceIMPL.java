@@ -1,26 +1,19 @@
 package hestia.msStore.service;
 
 import hestia.msStore.config.ClassMapper;
-import hestia.msStore.exeptions.ProductAPIException;
 import hestia.msStore.exeptions.ResourceNotFoundException;
 import hestia.msStore.model.Lista;
 import hestia.msStore.model.Product;
-import hestia.msStore.payload.ListaDto;
 import hestia.msStore.payload.ListaResponse;
-import hestia.msStore.payload.ProductDto;
-import hestia.msStore.payload.ProductResponse;
-import hestia.msStore.repository.CategoryRepository;
 import hestia.msStore.repository.ListaRepository;
 import hestia.msStore.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import java.math.BigDecimal;
-import java.util.*;
-import java.util.stream.Collectors;
-
-import static java.util.stream.Collectors.partitioningBy;
 import static java.util.stream.Collectors.toList;
 
 @Service
@@ -30,25 +23,19 @@ public class ListaServiceIMPL implements ListaService {
 
     private final ProductRepository productRepository;
 
-    private final CategoryRepository categoryRepository;
-
     private final ClassMapper mapper;
 
 
     @Autowired
-    public ListaServiceIMPL(ListaRepository listaRepository, ProductRepository productRepository, CategoryRepository categoryRepository, ClassMapper mapper) {
+    public ListaServiceIMPL(ListaRepository listaRepository, ProductRepository productRepository, ClassMapper mapper) {
         this.listaRepository = listaRepository;
         this.productRepository = productRepository;
-        this.categoryRepository = categoryRepository;
         this.mapper = mapper;
     }
 
     @Override
-    public List<ListaDto> findAllListas() {
-        return listaRepository.findAll()
-                .stream()
-                .map(ClassMapper.INTANCE::listaToDto)
-                .collect(toList());
+    public List<Lista> findAllListas() {
+        return new ArrayList<>(listaRepository.findAll());
     }
 
     @Override
@@ -74,7 +61,7 @@ public class ListaServiceIMPL implements ListaService {
 
             if (productGroups.containsKey(productName)) {
                 var listaResponse = productGroups.get(productName);
-                var productResponse = ClassMapper.INTANCE.responseToProduct(product);
+                var productResponse = mapper.responseToProduct(product);
 
                 if (listaResponse.getProducts() == null) {
                     listaResponse.setProducts(new ArrayList<>());
@@ -84,7 +71,7 @@ public class ListaServiceIMPL implements ListaService {
             } else {
                 var listaResponse = new ListaResponse();
                 listaResponse.setListaName(productName);
-                var productResponse = ClassMapper.INTANCE.responseToProduct(product);
+                var productResponse = mapper.responseToProduct(product);
                 listaResponse.setProducts(new ArrayList<>(List.of(productResponse)));
                 productGroups.put(productName, listaResponse);
             }
@@ -94,25 +81,28 @@ public class ListaServiceIMPL implements ListaService {
     }
 
     @Override
-    public ListaDto createLista(ListaDto listaDto) {
-        var lista = ClassMapper.INTANCE.dtoToLista(listaDto);
-        listaRepository.save(lista);
-        return ClassMapper.INTANCE.listaToDto(lista);
+    public Lista createLista(Lista lista) {
+        Lista newLista = Lista.builder()
+                .listaName(lista.getListaName())
+                .data(lista.getData())
+                .products(lista.getProducts())
+                .build();
+        return listaRepository.save(newLista);
     }
 
+
     @Override
-    public ListaDto updateLista(int listaId, ListaDto listaDto) {
+    public Lista updateLista(int listaId, Lista lista) {
         var existingList = listaRepository.findById(listaId).orElseThrow(
                 () -> new ResourceNotFoundException("Lista", "id", listaId));
 
-        existingList.setListaName(listaDto.getListaName());
-        existingList.setData(listaDto.getData());
-        listaRepository.save(existingList);
-        return ClassMapper.INTANCE.listaToDto(existingList);
+        existingList.setListaName(lista.getListaName());
+        existingList.setData(lista.getData());
+        return listaRepository.save(existingList);
     }
 
     @Override
-    public ListaDto addProductsInLista(int listaId, int productId) {
+    public Lista addProductsInLista(int listaId, int productId) {
         var existingList = listaRepository.findById(listaId).orElseThrow(
                 () -> new ResourceNotFoundException("Lista", "id", listaId));
 
@@ -120,8 +110,7 @@ public class ListaServiceIMPL implements ListaService {
                 () -> new ResourceNotFoundException("Product", "id", productId));
 
         existingList.getProducts().add(searchProduct);
-        listaRepository.save(existingList);
-        return ClassMapper.INTANCE.listaToDto(existingList);
+        return listaRepository.save(existingList);
     }
 
 

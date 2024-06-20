@@ -1,9 +1,7 @@
 package hestia.msStore.controller;
 
 import hestia.msStore.model.Lista;
-import hestia.msStore.payload.ListaDto;
 import hestia.msStore.payload.ListaResponse;
-import hestia.msStore.payload.ProductDto;
 import hestia.msStore.service.ListaServiceIMPL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +19,7 @@ public class ListaController {
 
 
     @GetMapping
-    public ResponseEntity<List<ListaDto>> findAllListas() {
+    public ResponseEntity<List<Lista>> findAllListas() {
         return new ResponseEntity<>(serviceIMPL.findAllListas(), HttpStatus.OK);
     }
 
@@ -31,35 +29,36 @@ public class ListaController {
     }
 
     @GetMapping("/comparator/{listaId}")
-    public ResponseEntity<List<ListaResponse>> findbyListaComparator(@PathVariable int listaId){
+    public ResponseEntity<List<ListaResponse>> findbyListaComparator(@PathVariable int listaId) {
         return new ResponseEntity<>(serviceIMPL.findbyListaComparator(listaId), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<ListaDto> createLista(@RequestBody ListaDto listaDto){
-        return new ResponseEntity<>(serviceIMPL.createLista(listaDto), HttpStatus.CREATED);
+    public ResponseEntity<Lista> createLista(@RequestBody Lista lista) {
+        return new ResponseEntity<>(serviceIMPL.createLista(lista), HttpStatus.CREATED);
     }
 
     @PutMapping("/{listaId}")
-    public ResponseEntity<ListaDto> updateLista(@PathVariable(value = "listaId") int listaId, @RequestBody ListaDto listaDto){
-        return new ResponseEntity<>(serviceIMPL.updateLista(listaId, listaDto), HttpStatus.OK);
+    public ResponseEntity<Lista> updateLista(@PathVariable(value = "listaId") int listaId, @RequestBody Lista lista) {
+        return new ResponseEntity<>(serviceIMPL.updateLista(listaId, lista), HttpStatus.OK);
     }
 
     @PutMapping("/add/{listaId}/{productId}")
-    public ResponseEntity<ListaDto> addProductsInLista(@PathVariable int listaId, @PathVariable int productId){
-        var listaDto = serviceIMPL.addProductsInLista(listaId, productId);
-        return new ResponseEntity<>(listaDto, HttpStatus.OK);
+    public ResponseEntity<Lista> addProductsInLista(@PathVariable int listaId, @PathVariable int productId) {
+        var lista = serviceIMPL.addProductsInLista(listaId, productId);
+        return new ResponseEntity<>(lista, HttpStatus.OK);
     }
 
     @DeleteMapping("/{listaId}")
-    public ResponseEntity<String> deleteListaById(@PathVariable(value = "listaId") int listaId){
+    public ResponseEntity<String> deleteListaById(@PathVariable(value = "listaId") int listaId) {
         serviceIMPL.deleteListaById(listaId);
-        return new ResponseEntity<>("Lista deleted Successfully",HttpStatus.OK);
+        return new ResponseEntity<>("Lista deleted Successfully", HttpStatus.OK);
     }
+
     @DeleteMapping("/{listaId}/{productId}")
-    public ResponseEntity<String> deleteProductInLista(@PathVariable int listaId, @PathVariable int productId){
+    public ResponseEntity<String> deleteProductInLista(@PathVariable int listaId, @PathVariable int productId) {
         serviceIMPL.deleteProductInLista(listaId, productId);
-        return new ResponseEntity<>("Products deleted Successfully",HttpStatus.OK);
+        return new ResponseEntity<>("Products deleted Successfully", HttpStatus.OK);
     }
 
 }

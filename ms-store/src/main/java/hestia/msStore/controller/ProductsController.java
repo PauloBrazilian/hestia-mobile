@@ -1,6 +1,7 @@
 package hestia.msStore.controller;
 
 
+import hestia.msStore.model.Product;
 import hestia.msStore.payload.ProductDto;
 import hestia.msStore.service.ProductServiceIMPL;
 import jakarta.validation.Valid;
@@ -24,8 +25,8 @@ public class ProductsController {
     }
 
     @GetMapping("/{productId}")
-    public ResponseEntity<List<ProductDto>> findAllProductById(@PathVariable(value = "productId") int productId, @RequestBody(required = false) ProductDto productDto) {
-        List<ProductDto> products = serviceIMPL.findAllProductById(productId);
+    public ResponseEntity<List<Product>> findAllProductById(@PathVariable(value = "productId") int productId, @RequestBody(required = false) ProductDto productDto) {
+        List<Product> products = serviceIMPL.findAllProductById(productId);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 

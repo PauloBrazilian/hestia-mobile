@@ -11,7 +11,7 @@ public interface ProductsService {
 
     public List<ProductDto> findAllProducts();
 
-    public List<ProductDto> findAllProductById(int productId);
+    public List<Product> findAllProductById(int productId);
 
     public ProductDto createProduct(ProductDto productDto);
 

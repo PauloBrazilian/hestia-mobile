@@ -1,5 +1,6 @@
 package hestia.msStore.service;
 
+import hestia.msStore.model.Lista;
 import hestia.msStore.payload.ListaDto;
 import hestia.msStore.payload.ListaResponse;
 
@@ -8,7 +9,7 @@ import java.util.List;
 public interface ListaService {
 
     public List<ListaDto> findAllListas();
-    public List<ListaDto> findAllListaById(int listaId);
+    public List<Lista> findAllListaById(int listaId);
 
     public List<ListaResponse> findbyListaComparator(int listaId);
 

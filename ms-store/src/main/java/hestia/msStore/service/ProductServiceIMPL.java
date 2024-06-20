@@ -37,7 +37,7 @@ public class ProductServiceIMPL implements ProductsService {
     }
 
     @Override
-    public List<ProductDto> findAllProductById(int productId) {
+    public List<Product> findAllProductById(int productId) {
         Optional<Product> products = productRepository.findById(productId);
 
         if (products.isEmpty()) {
@@ -45,7 +45,6 @@ public class ProductServiceIMPL implements ProductsService {
         }
 
         return products.stream()
-                .map(ClassMapper.INTANCE::productToDto)
                 .collect(Collectors.toList());
     }
 

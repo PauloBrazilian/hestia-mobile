@@ -1,5 +1,6 @@
 package hestia.msStore.controller;
 
+import hestia.msStore.model.Lista;
 import hestia.msStore.payload.ListaDto;
 import hestia.msStore.payload.ListaResponse;
 import hestia.msStore.payload.ProductDto;
@@ -25,7 +26,7 @@ public class ListaController {
     }
 
     @GetMapping("/{listaId}")
-    public ResponseEntity<List<ListaDto>> findAllListaById(@PathVariable(value = "listaId") int listaId) {
+    public ResponseEntity<List<Lista>> findAllListaById(@PathVariable(value = "listaId") int listaId) {
         return new ResponseEntity<>(serviceIMPL.findAllListaById(listaId), HttpStatus.OK);
     }
 

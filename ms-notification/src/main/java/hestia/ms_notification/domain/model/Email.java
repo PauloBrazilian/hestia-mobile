@@ -1,10 +1,7 @@
 package hestia.ms_notification.domain.model;
 
 import hestia.ms_notification.domain.enums.StatusEmail;
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
@@ -12,6 +9,7 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 public class Email {
 
     @Id
@@ -23,7 +21,6 @@ public class Email {
     private String subject;
     @Column(name = "TEXT")
     private String body;
-    private String contentType;
     private StatusEmail statusEmail;
 
 }

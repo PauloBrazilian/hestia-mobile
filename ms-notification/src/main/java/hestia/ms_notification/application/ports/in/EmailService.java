@@ -4,6 +4,6 @@ import hestia.ms_notification.domain.dto.EmailDto;
 
 public interface EmailService {
 
-    EmailDto emailWelcome(EmailDto emailDto);
+    String emailWelcome(EmailDto emailDto);
 
 }

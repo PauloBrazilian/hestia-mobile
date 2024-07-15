@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -25,6 +26,8 @@ public class Product {
     @JsonProperty("name")
     private String productName;
 
+    private Integer quantity;
+
     private String description;
 
     @Column(name = "img_url")
@@ -35,7 +38,7 @@ public class Product {
     @ManyToMany(mappedBy = "products")
     @Column(nullable = false)
     @JsonIgnore
-    private List<Lista> lists;
+    private List<Lista> lists = new ArrayList<>();
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "category_id")

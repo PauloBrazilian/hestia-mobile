@@ -12,7 +12,10 @@ import java.math.BigDecimal;
 
 import java.util.Set;
 
-@Getter @Setter @ToString
+@Setter
+@Getter
+@ToString
+@AllArgsConstructor
 @NoArgsConstructor
 public class ProductDto {
 
@@ -39,51 +42,4 @@ public class ProductDto {
     @JsonProperty("categories")
     private Category categories;
 
-    public ProductDto(String productName, String description, String imgUrl, BigDecimal price, Category categories) {
-        this.productName = productName;
-        this.description = description;
-        this.imgUrl = imgUrl;
-        this.price = price;
-        this.categories = categories;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public Category getCategories() {
-        return categories;
-    }
-
-    public void setCategories(Category categories) {
-        this.categories = categories;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getImgUrl() {
-        return imgUrl;
-    }
-
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
 }

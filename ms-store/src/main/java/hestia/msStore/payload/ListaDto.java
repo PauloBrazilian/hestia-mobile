@@ -12,6 +12,8 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
+@Setter
+@Getter
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,29 +30,5 @@ public class ListaDto {
 
     @JsonProperty("products")
     private List<ProductDto> products;
-
-    public List<ProductDto> getProducts() {
-        return products;
-    }
-
-    public String getListaName() {
-        return listaName;
-    }
-
-    public void setListaName(String listaName) {
-        this.listaName = listaName;
-    }
-
-    public LocalDate getData() {
-        return data;
-    }
-
-    public void setData(LocalDate data) {
-        this.data = data;
-    }
-
-    public void setProducts(List<ProductDto> products) {
-        this.products = products;
-    }
 
 }

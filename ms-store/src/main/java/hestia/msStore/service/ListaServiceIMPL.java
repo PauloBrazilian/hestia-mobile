@@ -9,6 +9,8 @@ import hestia.msStore.repository.ListaRepository;
 import hestia.msStore.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -67,11 +69,20 @@ public class ListaServiceIMPL implements ListaService {
                     listaResponse.setProducts(new ArrayList<>());
                 }
 
+                BigDecimal calcullyPrice = product.getPrice().multiply(BigDecimal.valueOf(product.getQuantity()));
+                productResponse.setPrice(productResponse.getPrice().add(calcullyPrice));
+
+                Integer calcullyQuantity = product.getQuantity();
+                Integer finalQuantity = productResponse.getQuantity() + calcullyQuantity;
+                productResponse.setQuantity(finalQuantity);
+
                 listaResponse.getProducts().add(productResponse);
             } else {
                 var listaResponse = new ListaResponse();
                 listaResponse.setListaName(productName);
                 var productResponse = mapper.responseToProduct(product);
+                productResponse.setPrice(product.getPrice().multiply(BigDecimal.valueOf(product.getQuantity())));
+                productResponse.setQuantity(product.getQuantity());
                 listaResponse.setProducts(new ArrayList<>(List.of(productResponse)));
                 productGroups.put(productName, listaResponse);
             }

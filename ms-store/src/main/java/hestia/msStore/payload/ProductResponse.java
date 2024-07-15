@@ -9,7 +9,10 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.util.List;
 
-@Getter @Setter @ToString
+@Setter
+@Getter
+@ToString
+@AllArgsConstructor
 @NoArgsConstructor
 public class ProductResponse {
 
@@ -23,19 +26,6 @@ public class ProductResponse {
     @JsonProperty("price")
     private BigDecimal price;
 
-    public String getProductName() {
-        return productName;
-    }
+    private Integer quantity;
 
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
 }

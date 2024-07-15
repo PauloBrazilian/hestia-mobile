@@ -54,6 +54,7 @@ public class ProductServiceIMPL implements ProductsService {
                 .description(product.getDescription())
                 .imgUrl(product.getImgUrl())
                 .price(product.getPrice())
+                .quantity(product.getQuantity())
                 .category(getCategoryById(product.getCategory()))
                 .build();
 

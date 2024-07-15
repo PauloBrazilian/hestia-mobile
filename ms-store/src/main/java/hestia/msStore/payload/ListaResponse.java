@@ -2,12 +2,12 @@ package hestia.msStore.payload;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.List;
 
+@Setter
+@Getter
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,19 +20,4 @@ public class ListaResponse {
     @JsonProperty("products")
     private List<ProductResponse> products;
 
-    public String getListaName() {
-        return listaName;
-    }
-
-    public void setListaName(String listaName) {
-        this.listaName = listaName;
-    }
-
-    public List<ProductResponse> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<ProductResponse> products) {
-        this.products = products;
-    }
 }

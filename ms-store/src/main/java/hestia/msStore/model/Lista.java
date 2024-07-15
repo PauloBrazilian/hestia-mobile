@@ -1,13 +1,12 @@
 package hestia.msStore.model;
 
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
-
 
 @Getter
 @Setter
@@ -29,10 +28,10 @@ public class Lista {
 
     private LocalDate data;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "lista_product",
-            joinColumns = @JoinColumn(name = "lista_id", referencedColumnName = "listaId"),
+            joinColumns = @JoinColumn(name = "lista_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private List<Product> products;
+    private List<Product> products = new ArrayList<>();
 
 }

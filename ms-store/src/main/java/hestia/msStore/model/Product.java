@@ -11,7 +11,7 @@ import java.util.List;
 
 @Getter
 @Setter
-@ToString
+@ToString(exclude = "lists")
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -36,9 +36,8 @@ public class Product {
     private BigDecimal price;
 
     @ManyToMany(mappedBy = "products")
-    @Column(nullable = false)
     @JsonIgnore
-    private List<Lista> lists = new ArrayList<>();
+    private List<Lista> lists;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "category_id")

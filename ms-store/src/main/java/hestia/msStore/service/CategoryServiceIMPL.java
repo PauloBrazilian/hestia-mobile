@@ -6,6 +6,7 @@ import hestia.msStore.model.Category;
 import hestia.msStore.model.Product;
 import hestia.msStore.repository.CategoryRepository;
 import hestia.msStore.repository.ProductRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -13,18 +14,12 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+@AllArgsConstructor
 @Service
 public class CategoryServiceIMPL implements CategoryService {
 
     private final CategoryRepository categoryRepository;
-
     private final ProductRepository productRepository;
-
-    @Autowired
-    public CategoryServiceIMPL(CategoryRepository categoryRepository, ProductRepository productRepository) {
-        this.categoryRepository = categoryRepository;
-        this.productRepository = productRepository;
-    }
 
     @Override
     public List<Product> findAllCategoryByName(String categoryName) {
@@ -38,8 +33,7 @@ public class CategoryServiceIMPL implements CategoryService {
 
         for (Category category : categoryList) {
             List<Product> productList = getProductyById(category);
-            List<Product> categoryProductDtos = productList.stream()
-                    .toList();
+            List<Product> categoryProductDtos = productList.stream().toList();
 
             productDtoList.addAll(categoryProductDtos);
         }

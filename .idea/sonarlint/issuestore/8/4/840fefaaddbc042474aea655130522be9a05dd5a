@@ -1,10 +1,0 @@
-
-•	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÓæÁÑJ$97e073e3-9710-4788-8837-eb40a17572b9
-[
-java:S1128"9Remove this unused import 'hestia.msStore.model.Product'.(‡€óúÿÿÿÿ8ĞÌ‰Ã‹2
-T
-java:S1128	"7Remove this unused import 'java.text.SimpleDateFormat'.(ú¡ÙÛ8ÓÌ‰Ã‹2
-V
-java:S1128"4Remove this unused import 'java.time.LocalDateTime'.(æÃ§ƒüÿÿÿÿ8ÔÌ‰Ã‹2
-H
-java:S1128"+Remove this unused import 'java.util.Date'.(¸…¼ü8ÔÌ‰Ã‹2

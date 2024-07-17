@@ -3,6 +3,7 @@ package hestia.msStore.controller;
 import hestia.msStore.model.Lista;
 import hestia.msStore.payload.ListaResponse;
 import hestia.msStore.service.ListaServiceIMPL;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,13 +11,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping("/lista")
 public class ListaController {
 
-    @Autowired
     private ListaServiceIMPL serviceIMPL;
-
 
     @GetMapping
     public ResponseEntity<List<Lista>> findAllListas() {
@@ -24,8 +24,8 @@ public class ListaController {
     }
 
     @GetMapping("/{listaId}")
-    public ResponseEntity<List<Lista>> findAllListaById(@PathVariable(value = "listaId") int listaId) {
-        return new ResponseEntity<>(serviceIMPL.findAllListaById(listaId), HttpStatus.OK);
+    public ResponseEntity<Lista> findListaById(@PathVariable(value = "listaId") int listaId) {
+        return new ResponseEntity<>(serviceIMPL.findListaById(listaId), HttpStatus.OK);
     }
 
     @GetMapping("/comparator/{listaId}")

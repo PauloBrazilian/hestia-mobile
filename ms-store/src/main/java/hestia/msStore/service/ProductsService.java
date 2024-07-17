@@ -8,15 +8,15 @@ import java.util.List;
 
 public interface ProductsService {
 
-    public List<Product> findAllProducts();
+    List<Product> findAllProducts();
 
-    public List<Product> findAllProductById(int productId);
+    Product findProductById(int productId);
 
-    public Product createProduct(Product product);
+    Product createProduct(Product product);
 
-    public Product updateProduct(int productId, Product product);
+    Product updateProduct(int productId, Product product);
 
-    public void deleteProductById(int productId);
+    void deleteProductById(int productId);
 
-    public Category getCategoryById(Category category);
+    Category getCategoryById(Category category);
 }

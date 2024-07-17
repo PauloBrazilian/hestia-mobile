@@ -14,8 +14,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "Lista")
 @Builder
+@Table(name = "Lista")
 public class Lista {
 
     @Id
@@ -32,6 +32,6 @@ public class Lista {
     @JoinTable(name = "lista_product",
             joinColumns = @JoinColumn(name = "lista_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private List<Product> products = new ArrayList<>();
+    private List<Product> products;
 
 }

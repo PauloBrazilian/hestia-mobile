@@ -5,18 +5,19 @@ import hestia.msStore.model.Product;
 import hestia.msStore.payload.ProductDto;
 import hestia.msStore.service.ProductServiceIMPL;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping("/products")
 public class ProductsController {
 
-    @Autowired
     private ProductServiceIMPL serviceIMPL;
 
     @PostMapping("/creating")
@@ -25,8 +26,8 @@ public class ProductsController {
     }
 
     @GetMapping("/{productId}")
-    public ResponseEntity<List<Product>> findAllProductById(@PathVariable(value = "productId") int productId, @RequestBody(required = false) ProductDto productDto) {
-        List<Product> products = serviceIMPL.findAllProductById(productId);
+    public ResponseEntity<Product> findProductById(@PathVariable(value = "productId") int productId, @RequestBody(required = false) ProductDto productDto) {
+        var products = serviceIMPL.findProductById(productId);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 

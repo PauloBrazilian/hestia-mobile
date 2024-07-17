@@ -7,6 +7,7 @@ import hestia.msStore.payload.ListaResponse;
 import hestia.msStore.payload.ProductDto;
 import hestia.msStore.payload.ProductResponse;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
 public interface ClassMapper {
@@ -22,9 +23,5 @@ public interface ClassMapper {
     ListaDto listaToDto(Lista lista);
 
     Lista dtoToLista(ListaDto listaDto);
-
-    ListaResponse responseToLista(Lista lista);
-
-    Lista listaToResponse(ListaResponse listaResponse);
 
 }

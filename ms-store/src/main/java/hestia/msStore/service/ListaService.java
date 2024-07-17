@@ -6,20 +6,20 @@ import java.util.List;
 
 public interface ListaService {
 
-    public List<Lista> findAllListas();
+    List<Lista> findAllListas();
 
-    public List<Lista> findAllListaById(int listaId);
+    Lista findListaById(int listaId);
 
-    public List<ListaResponse> findbyListaComparator(int listaId);
+    List<ListaResponse> findbyListaComparator(int listaId);
 
-    public Lista createLista(Lista lista);
+    Lista createLista(Lista lista);
 
-    public Lista updateLista(int listaId, Lista lista);
+    Lista updateLista(int listaId, Lista lista);
 
-    public Lista addProductsInLista(int listaId, int productId);
+    Lista addProductsInLista(int listaId, int productId);
 
-    public void deleteListaById(int listaId);
+    void deleteListaById(int listaId);
 
-    public void deleteProductInLista(int listaId, int productId);
+    void deleteProductInLista(int listaId, int productId);
 
 }

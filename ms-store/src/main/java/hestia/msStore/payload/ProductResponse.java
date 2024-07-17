@@ -26,6 +26,9 @@ public class ProductResponse {
     @JsonProperty("price")
     private BigDecimal price;
 
+    @NotNull
+    @DecimalMin(value = "1", message = "The product quantity cant be less than 1")
+    @JsonProperty("quantity")
     private Integer quantity;
 
 }

@@ -15,11 +15,4 @@ public class ProductAPIException extends RuntimeException {
         this.message =message;
         this.status=status;
     }
-
-    public ProductAPIException(HttpStatus status, String message,String message1) {
-        super(message);
-        this.status = status;
-        this.message = message1;
-
-    }
 }

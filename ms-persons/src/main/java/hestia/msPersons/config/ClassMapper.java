@@ -2,31 +2,19 @@ package hestia.msPersons.config;
 
 import hestia.msPersons.entity.Person;
 import hestia.msPersons.entity.PersonBUSS;
-import hestia.msPersons.payload.PersonBussDTO;
-import hestia.msPersons.payload.PersonDTO;
+import hestia.msPersons.payload.PersonBussDto;
+import hestia.msPersons.payload.PersonDto;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
 public interface ClassMapper {
 
-    ClassMapper INTANCE = Mappers.getMapper(ClassMapper.class);
+    PersonDto personToDto(Person person);
 
-    @Mapping(source = "name", target = "name")
-    @Mapping(source = "personImg", target = "personImg")
-    @Mapping(source = "email", target = "email")
-    @Mapping(source = "password", target = "password")
-    PersonDTO personToDto (Person person);
+    Person dtoToPerson(PersonDto personDTO);
 
-    @Mapping(source = "name", target = "name")
-    @Mapping(source = "personImg", target = "personImg")
-    @Mapping(source = "email", target = "email")
-    @Mapping(source = "password", target = "password")
-    Person dtoToPerson (PersonDTO personDTO);
+    PersonBussDto personBussToDto(PersonBUSS personBuss);
 
-    PersonBussDTO personBussToDto (PersonBUSS personBuss);
-
-    PersonBUSS dtoToPersonBuss (PersonBussDTO personBussDTO);
+    PersonBUSS dtoToPersonBuss(PersonBussDto personBussDTO);
 
 }

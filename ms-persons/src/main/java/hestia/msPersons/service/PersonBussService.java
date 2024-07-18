@@ -1,23 +1,19 @@
 package hestia.msPersons.service;
 
-
-
-import hestia.msPersons.entity.PersonBUSS;
-import hestia.msPersons.payload.PersonBussDTO;
-import org.springframework.http.ResponseEntity;
+import hestia.msPersons.payload.PersonBussDto;
 
 import java.util.List;
 
 public interface PersonBussService {
 
-    public List<PersonBussDTO> FindAllPersonsBus();
+    List<PersonBussDto> findAllPersonsBus();
 
-    public PersonBussDTO getPersonBusById(int personBussId);
+    PersonBussDto getPersonBusById(int personBussId);
 
-    public PersonBussDTO createPersonBus(PersonBussDTO personBussDTO);
+    PersonBussDto createPersonBus(PersonBussDto personBussDTO);
 
-    public PersonBussDTO updatePersonBus(int personBussId, PersonBussDTO personBussDTO);
+    PersonBussDto updatePersonBus(int personBussId, PersonBussDto personBussDTO);
 
-    public void deletePersonBusById(int personBussId);
+    void deletePersonBusById(int personBussId);
 
 }

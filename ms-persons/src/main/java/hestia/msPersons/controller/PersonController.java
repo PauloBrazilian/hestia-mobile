@@ -1,54 +1,46 @@
 package hestia.msPersons.controller;
 
-import hestia.msPersons.entity.Person;
-import hestia.msPersons.payload.PersonDTO;
-import hestia.msPersons.service.PersonUserServiceIMPL;
+import hestia.msPersons.payload.PersonDto;
+import hestia.msPersons.service.PersonServiceIMPL;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
 import java.util.List;
 
-
+@AllArgsConstructor
 @RestController
 @RequestMapping("/person")
 public class PersonController {
 
-    private PersonUserServiceIMPL personUserServiceIMPL;
-
-    @Autowired
-    public PersonController(PersonUserServiceIMPL personUserServiceIMPL) {
-        this.personUserServiceIMPL = personUserServiceIMPL;
-    }
+    private PersonServiceIMPL personUserServiceIMPL;
 
     @GetMapping
-    public List<PersonDTO> FindAllPersons(){
-        return personUserServiceIMPL.FindAllPersons();
+    public List<PersonDto> findAllPersons() {
+        return personUserServiceIMPL.findAllPersons();
     }
 
     @PostMapping
-    public ResponseEntity<PersonDTO> createPerson(@RequestBody @Valid PersonDTO personDTO){
+    public ResponseEntity<PersonDto> createPerson(@RequestBody @Valid PersonDto personDTO) {
         return new ResponseEntity<>(personUserServiceIMPL.createPerson(personDTO), HttpStatus.CREATED);
     }
 
     @GetMapping("/{personId}")
-    public ResponseEntity<PersonDTO> getPersonById(@PathVariable("personId") int personId){
+    public ResponseEntity<PersonDto> getPersonById(@PathVariable("personId") int personId) {
         return new ResponseEntity<>(personUserServiceIMPL.getPersonById(personId), HttpStatus.OK);
     }
 
     @PutMapping("/{personId}")
-    public ResponseEntity<PersonDTO> updatePerson(@PathVariable("personId") int personId, @RequestBody PersonDTO personDTO) {
+    public ResponseEntity<PersonDto> updatePerson(@PathVariable("personId") int personId, @RequestBody PersonDto personDTO) {
         return new ResponseEntity<>(personUserServiceIMPL.updatePerson(personId, personDTO), HttpStatus.OK);
     }
 
     @DeleteMapping("/{personId}")
-    public ResponseEntity<String> deletePersonById(@PathVariable("personId") int personId){
+    public ResponseEntity<String> deletePersonById(@PathVariable("personId") int personId) {
         personUserServiceIMPL.deletePersonById(personId);
         return new ResponseEntity<>("Product deleted Successfully", HttpStatus.OK);
     }
-
 
 }

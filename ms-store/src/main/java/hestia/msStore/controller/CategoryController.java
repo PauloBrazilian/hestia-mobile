@@ -1,7 +1,7 @@
 package hestia.msStore.controller;
 
+import hestia.msStore.model.Category;
 import hestia.msStore.model.Product;
-import hestia.msStore.payload.CategoryDto;
 import hestia.msStore.service.CategoryServiceIMPL;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,7 +21,7 @@ public class CategoryController {
     private CategoryServiceIMPL serviceIMPL;
 
     @GetMapping
-    public ResponseEntity<List<CategoryDto>> findAllCategory(){
+    public ResponseEntity<List<Category>> findAllCategory() {
         return new ResponseEntity<>(serviceIMPL.findAllCategory(), HttpStatus.OK);
     }
 

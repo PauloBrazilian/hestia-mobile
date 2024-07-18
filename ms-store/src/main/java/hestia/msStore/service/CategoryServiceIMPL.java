@@ -1,11 +1,9 @@
 package hestia.msStore.service;
 
-import hestia.msStore.config.ClassMapper;
 import hestia.msStore.exeptions.ProductAPIException;
 import hestia.msStore.exeptions.ResourceNotFoundException;
 import hestia.msStore.model.Category;
 import hestia.msStore.model.Product;
-import hestia.msStore.payload.CategoryDto;
 import hestia.msStore.repository.CategoryRepository;
 import hestia.msStore.repository.ProductRepository;
 import lombok.AllArgsConstructor;
@@ -15,22 +13,16 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
-
 @AllArgsConstructor
 @Service
 public class CategoryServiceIMPL implements CategoryService {
 
     private final CategoryRepository categoryRepository;
     private final ProductRepository productRepository;
-    private final ClassMapper mapper;
 
     @Override
-    public List<CategoryDto> findAllCategory() {
-        return categoryRepository.findAll()
-                .stream()
-                .map(mapper::categoryToDto)
-                .collect(toList());
+    public List<Category> findAllCategory() {
+        return new ArrayList<>(categoryRepository.findAll());
     }
 
     @Override

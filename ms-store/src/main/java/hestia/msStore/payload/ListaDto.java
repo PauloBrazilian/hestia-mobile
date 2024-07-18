@@ -2,14 +2,10 @@ package hestia.msStore.payload;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import hestia.msStore.model.Product;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Setter

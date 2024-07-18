@@ -7,7 +7,6 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @Setter
 @Getter
@@ -22,7 +21,7 @@ public class ProductResponse {
     private String productName;
 
     @NotNull
-    @DecimalMin(value = "1",message = "The product price cant be less than 1")
+    @DecimalMin(value = "1", message = "The product price cant be less than 1")
     @JsonProperty("price")
     private BigDecimal price;
 

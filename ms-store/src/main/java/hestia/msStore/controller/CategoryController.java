@@ -1,9 +1,11 @@
 package hestia.msStore.controller;
 
 import hestia.msStore.model.Product;
+import hestia.msStore.payload.CategoryDto;
 import hestia.msStore.service.CategoryServiceIMPL;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,11 @@ import java.util.List;
 public class CategoryController {
 
     private CategoryServiceIMPL serviceIMPL;
+
+    @GetMapping
+    public ResponseEntity<List<CategoryDto>> findAllCategory(){
+        return new ResponseEntity<>(serviceIMPL.findAllCategory(), HttpStatus.OK);
+    }
 
     @GetMapping("/{categoryName}")
     public List<Product> findAllCategoryByName(@PathVariable String categoryName) {

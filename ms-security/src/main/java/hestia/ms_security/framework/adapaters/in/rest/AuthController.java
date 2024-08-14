@@ -1,10 +1,10 @@
 package hestia.ms_security.framework.adapaters.in.rest;
 
 import hestia.ms_security.application.service.AuthServiceImpl;
-import hestia.ms_security.domain.dto.LoginDto;
-import hestia.ms_security.domain.dto.PersonResponse;
-import hestia.ms_security.domain.dto.PersonBussDto;
-import hestia.ms_security.domain.dto.PersonDto;
+import hestia.ms_security.domain.dto.in.LoginDto;
+import hestia.ms_security.domain.dto.in.PersonResponse;
+import hestia.ms_security.domain.dto.in.PersonBussDto;
+import hestia.ms_security.domain.dto.in.PersonDto;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

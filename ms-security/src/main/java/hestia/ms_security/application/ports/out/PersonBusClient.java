@@ -1,6 +1,6 @@
 package hestia.ms_security.application.ports.out;
 
-import hestia.ms_security.domain.dto.PersonBussDto;
+import hestia.ms_security.domain.dto.in.PersonBussDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.FeignClientProperties;
 import org.springframework.web.bind.annotation.*;

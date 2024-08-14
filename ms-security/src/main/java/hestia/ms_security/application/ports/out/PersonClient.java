@@ -1,6 +1,6 @@
 package hestia.ms_security.application.ports.out;
 
-import hestia.ms_security.domain.dto.PersonDto;
+import hestia.ms_security.domain.dto.in.PersonDto;
 import jakarta.validation.Valid;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.FeignClientProperties;

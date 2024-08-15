@@ -14,4 +14,6 @@ public class EmailDto {
     private String replyTo;
     private String subject;
     private String body;
+    private String imageBase64;
+
 }

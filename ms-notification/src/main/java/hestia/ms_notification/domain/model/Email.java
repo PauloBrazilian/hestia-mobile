@@ -22,5 +22,7 @@ public class Email {
     @Column(name = "TEXT")
     private String body;
     private StatusEmail statusEmail;
+    @Column(name = "image_base64", columnDefinition = "TEXT")
+    private String imageBase64;
 
 }

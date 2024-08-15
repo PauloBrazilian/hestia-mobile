@@ -28,7 +28,6 @@ import static java.util.stream.Collectors.toList;
 @Service
 public class ListaServiceIMPL implements ListaService {
 
-    private final AuthClient authClient;
     private final PersonClient personClient;
     private final ListaRepository listaRepository;
     private final ProductRepository productRepository;
@@ -61,11 +60,13 @@ public class ListaServiceIMPL implements ListaService {
             listaResponse.setListaName(productName);
             var productResponse = mapper.responseToProduct(product);
 
-            productResponse.setPrice(product.getPrice().multiply(BigDecimal.valueOf(product.getQuantity())));
+            productResponse.setPrice(product.getPrice());
             productResponse.setQuantity(product.getQuantity());
             productResponse.setPersonBussName(product.getPersonBussName());
 
             listaResponse.setProducts(new ArrayList<>(List.of(productResponse)));
+            listaResponse.getProducts().add(productResponse);
+            listaResponse.setTotal(product.getPrice().multiply(BigDecimal.valueOf(product.getQuantity())));
             productGroups.put(productName, listaResponse);
         }
 

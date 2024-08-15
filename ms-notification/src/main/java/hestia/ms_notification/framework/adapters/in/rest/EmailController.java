@@ -24,5 +24,4 @@ public class EmailController {
         return new ResponseEntity<>("Send email with Success", HttpStatus.OK);
     }
 
-
 }

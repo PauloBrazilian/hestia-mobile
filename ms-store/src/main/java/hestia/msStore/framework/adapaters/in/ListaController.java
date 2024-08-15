@@ -3,6 +3,9 @@ package hestia.msStore.framework.adapaters.in;
 import hestia.msStore.application.service.ListaServiceIMPL;
 import hestia.msStore.domain.dto.in.ListaDto;
 import hestia.msStore.domain.dto.in.ListaResponse;
+import hestia.msStore.domain.dto.in.ProductDto;
+import hestia.msStore.domain.model.Product;
+import jakarta.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,8 +46,8 @@ public class ListaController {
     }
 
     @PutMapping("/add/{listaId}/{productId}")
-    public ResponseEntity<ListaDto> addProductsInLista(@PathVariable Long listaId, @PathVariable Long productId) {
-        var lista = serviceIMPL.addProductsInLista(listaId, productId);
+    public ResponseEntity<ListaDto> addProductsInLista(@PathVariable Long listaId, @PathVariable Long productId, @RequestBody ProductDto productDto) {
+        var lista = serviceIMPL.addProductsInLista(listaId, productId, productDto);
         return new ResponseEntity<>(lista, HttpStatus.OK);
     }
 

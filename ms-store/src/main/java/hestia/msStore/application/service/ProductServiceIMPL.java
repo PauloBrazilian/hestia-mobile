@@ -46,7 +46,7 @@ public class ProductServiceIMPL implements ProductsService {
     @Override
     public ProductDto createProduct(ProductDto productDto) {
 
-        var personResponseOpt = new PersonResponse(productDto.getPersonBussName(), "", "secret");
+        var personResponseOpt = new PersonResponse(productDto.getPersonBussName(), "secret", "secret");
 
         if (personResponseOpt.email().isEmpty()) {
             var product = mapper.dtoToProduct(productDto);

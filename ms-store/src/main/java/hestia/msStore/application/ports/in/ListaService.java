@@ -1,8 +1,10 @@
 package hestia.msStore.application.ports.in;
 
 import hestia.msStore.domain.dto.in.ListaDto;
+import hestia.msStore.domain.dto.in.ProductDto;
 import hestia.msStore.domain.model.Lista;
 import hestia.msStore.domain.dto.in.ListaResponse;
+import hestia.msStore.domain.model.Product;
 
 import java.util.List;
 
@@ -18,7 +20,7 @@ public interface ListaService {
 
     ListaDto updateLista(Long listaId, ListaDto listaDto);
 
-    ListaDto addProductsInLista(Long listaId, Long productId);
+    ListaDto addProductsInLista(Long listaId, Long productId, ProductDto productDto);
 
     void deleteListaById(Long listaId);
 

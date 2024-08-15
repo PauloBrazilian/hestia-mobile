@@ -35,5 +35,4 @@ public class AuthController {
         return new ResponseEntity<>(authServiceImpl.registerBus(personBusDto), HttpStatus.CREATED);
     }
 
-
 }

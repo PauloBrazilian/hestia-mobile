@@ -5,6 +5,7 @@ import hestia.msStore.application.ports.out.AuthClient;
 import hestia.msStore.application.ports.out.PersonClient;
 import hestia.msStore.domain.dto.in.ListaDto;
 import hestia.msStore.domain.dto.in.ListaResponse;
+import hestia.msStore.domain.dto.in.ProductDto;
 import hestia.msStore.domain.dto.out.LoginDto;
 import hestia.msStore.domain.dto.out.PersonResponse;
 import hestia.msStore.domain.mapper.ClassMapper;
@@ -62,13 +63,14 @@ public class ListaServiceIMPL implements ListaService {
 
             productResponse.setPrice(product.getPrice().multiply(BigDecimal.valueOf(product.getQuantity())));
             productResponse.setQuantity(product.getQuantity());
+            productResponse.setPersonBussName(product.getPersonBussName());
+
             listaResponse.setProducts(new ArrayList<>(List.of(productResponse)));
             productGroups.put(productName, listaResponse);
         }
 
         return new ArrayList<>(productGroups.values());
     }
-
 
     @Override
     @Transactional
@@ -105,14 +107,18 @@ public class ListaServiceIMPL implements ListaService {
     }
 
     @Override
-    public ListaDto addProductsInLista(Long listaId, Long productId) {
+    public ListaDto addProductsInLista(Long listaId, Long productId, ProductDto productDto) {
         var existingList = listaRepository.findById(listaId).orElseThrow(
                 () -> new ResourceNotFoundException("Lista", "id", listaId));
 
         var searchProduct = productRepository.findById(productId).orElseThrow(
                 () -> new ResourceNotFoundException("Product", "id", productId));
 
+        System.out.println("Quantidade recebida no DTO: " + productDto.getQuantity());
+
+        searchProduct.setQuantity(productDto.getQuantity());
         existingList.getProducts().add(searchProduct);
+
         var savedLista = listaRepository.save(existingList);
         return mapper.listaToDto(savedLista);
     }

@@ -30,4 +30,7 @@ public class ProductResponse {
     @JsonProperty("quantity")
     private Integer quantity;
 
+    @JsonProperty("business")
+    private String personBussName;
+
 }

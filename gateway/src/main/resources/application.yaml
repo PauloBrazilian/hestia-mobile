@@ -15,36 +15,50 @@ spring:
           enabled: true
           lower-case-service-id: true
       routes:
-        - id: ms-persons
+        - id: ms-security
           uri: http://localhost:8081
+          predicates:
+            - Path=/auth2/**
+          filters:
+            - LoggingFilter
+
+        - id: ms-security
+          uri: http://localhost:8081
+          predicates:
+            - Path=/persons/**
+          filters:
+            - LoggingFilter
+
+        - id: ms-persons
+          uri: http://localhost:8082
           predicates:
             - Path=/person/**
           filters:
             - LoggingFilter
 
         - id: ms-persons
-          uri: http://localhost:8081
+          uri: http://localhost:8082
           predicates:
             - Path=/personBus/**
           filters:
             - LoggingFilter
 
         - id: ms-store
-          uri: http://localhost:8082
+          uri: http://localhost:8083
           predicates:
             - Path=/products/**
           filters:
             - LoggingFilter
 
         - id: ms-store
-          uri: http://localhost:8082
+          uri: http://localhost:8083
           predicates:
             - Path=/lista/**
           filters:
             - LoggingFilter
 
         - id: ms-store
-          uri: http://localhost:8082
+          uri: http://localhost:8083
           predicates:
             - Path=/category/**
           filters:

@@ -2,7 +2,6 @@ package hestia.msStore.domain.dto.in;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import hestia.msStore.domain.dto.out.PersonDto;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 

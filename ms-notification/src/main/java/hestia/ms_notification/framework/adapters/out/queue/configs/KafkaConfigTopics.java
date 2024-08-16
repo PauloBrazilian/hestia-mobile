@@ -17,7 +17,7 @@ public class KafkaConfigTopics {
     private final KafkaProperties kafkaProperties;
 
     @Bean
-    public KafkaAdmin KafkaAdmin(){
+    public KafkaAdmin KafkaAdmin() {
         var configs = new HashMap<String, Object>();
         configs.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProperties.getBootstrapServers());
         return new KafkaAdmin(configs);

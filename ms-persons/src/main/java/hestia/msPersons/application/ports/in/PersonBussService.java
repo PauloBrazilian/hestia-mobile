@@ -1,8 +1,6 @@
 package hestia.msPersons.application.ports.in;
 
 import hestia.msPersons.domain.dto.PersonBussDto;
-import hestia.msPersons.domain.dto.PersonDto;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 

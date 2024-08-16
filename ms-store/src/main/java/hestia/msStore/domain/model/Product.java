@@ -2,7 +2,6 @@ package hestia.msStore.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import hestia.msStore.domain.dto.out.PersonBussDto;
 import jakarta.persistence.*;
 import lombok.*;
 

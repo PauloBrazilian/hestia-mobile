@@ -1,7 +1,6 @@
 package hestia.msStore.domain.dto.in;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 

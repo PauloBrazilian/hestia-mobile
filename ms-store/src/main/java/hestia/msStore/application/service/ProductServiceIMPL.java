@@ -7,6 +7,7 @@ import hestia.msStore.domain.dto.out.LoginDto;
 import hestia.msStore.domain.dto.out.PersonResponse;
 import hestia.msStore.domain.mapper.ClassMapper;
 import hestia.msStore.domain.model.Category;
+import hestia.msStore.domain.model.Product;
 import hestia.msStore.framework.adapaters.out.CategoryRepository;
 import hestia.msStore.framework.adapaters.out.ProductRepository;
 import hestia.msStore.framework.exeptions.ProductAPIException;
@@ -14,11 +15,10 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-
-import static java.util.stream.Collectors.toList;
 
 @AllArgsConstructor
 @Service
@@ -33,8 +33,20 @@ public class ProductServiceIMPL implements ProductsService {
     public List<ProductDto> findAllProducts() {
         return productRepository.findAll()
                 .stream()
+                .filter(product -> product.getLists() == null || product.getLists().isEmpty())
                 .map(mapper::productToDto)
-                .collect(toList());
+                .toList();
+    }
+
+    @Override
+    public List<ProductDto> findAllProductsComparator(String productName) {
+        List<Product> products = productRepository.findAllByProductName(productName);
+
+        products.sort(Comparator.comparing(Product::getPrice));
+
+        return products.stream()
+                .map(mapper::productToDto)
+                .toList();
     }
 
     @Override
@@ -46,7 +58,7 @@ public class ProductServiceIMPL implements ProductsService {
     @Override
     public ProductDto createProduct(ProductDto productDto) {
 
-        var personResponseOpt = new PersonResponse(productDto.getPersonBussName(), "secret", "secret");
+        var personResponseOpt = new PersonResponse(productDto.getPersonBussName(), "", "secret");
 
         if (personResponseOpt.email().isEmpty()) {
             var product = mapper.dtoToProduct(productDto);
@@ -65,7 +77,7 @@ public class ProductServiceIMPL implements ProductsService {
             return mapper.productToDto(newProduct);
         }
 
-        throw new RuntimeException("Bad Request in the List");
+        throw new RuntimeException("Bad Request in the Product");
     }
 
 

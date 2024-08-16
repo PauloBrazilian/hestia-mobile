@@ -10,7 +10,6 @@ import hestia.ms_security.domain.dto.out.EmailDto;
 import hestia.ms_security.domain.enums.AuthorizationEnum;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

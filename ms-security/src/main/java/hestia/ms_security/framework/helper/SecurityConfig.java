@@ -43,12 +43,13 @@ public class SecurityConfig {
 
                         .requestMatchers(HttpMethod.POST, "/products/creating").hasRole("BUSINESS")
                         .requestMatchers(HttpMethod.GET, "/products").hasAnyRole("BUSINESS", "USER")
+                        .requestMatchers(HttpMethod.GET, "/products/comparator/{productName}").hasRole("USER")
                         .requestMatchers(HttpMethod.GET, "/products/{productId}").hasAnyRole("BUSINESS", "USER")
                         .requestMatchers(HttpMethod.PUT, "/products/{productId}").hasRole("BUSINESS")
                         .requestMatchers(HttpMethod.DELETE, "/products/{productId}").hasRole("BUSINESS")
 
                         .requestMatchers(HttpMethod.POST, "/lista").hasRole("USER")
-                        .requestMatchers(HttpMethod.GET, "/lista").hasRole("USER")
+                        .requestMatchers(HttpMethod.GET, "/lista/all/{personName}").hasRole("USER")
                         .requestMatchers(HttpMethod.GET, "/lista/{listaId}").hasRole("USER")
                         .requestMatchers(HttpMethod.GET, "/lista/comparator/{listaId}").hasRole("USER")
                         .requestMatchers(HttpMethod.PUT, "/lista/{listaId}").hasRole("USER")

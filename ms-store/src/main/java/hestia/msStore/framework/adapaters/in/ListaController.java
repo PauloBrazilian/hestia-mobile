@@ -4,8 +4,6 @@ import hestia.msStore.application.service.ListaServiceIMPL;
 import hestia.msStore.domain.dto.in.ListaDto;
 import hestia.msStore.domain.dto.in.ListaResponse;
 import hestia.msStore.domain.dto.in.ProductDto;
-import hestia.msStore.domain.model.Product;
-import jakarta.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,9 +23,9 @@ public class ListaController {
         return new ResponseEntity<>(serviceIMPL.createLista(listaDto), HttpStatus.CREATED);
     }
 
-    @GetMapping
-    public ResponseEntity<List<ListaDto>> findAllListas() {
-        return new ResponseEntity<>(serviceIMPL.findAllListas(), HttpStatus.OK);
+    @GetMapping("/all/{personName}")
+    public ResponseEntity<List<ListaDto>> findAllListas(@PathVariable(value = "personName") String personName) {
+        return new ResponseEntity<>(serviceIMPL.findAllListas(personName), HttpStatus.OK);
     }
 
     @GetMapping("/{listaId}")

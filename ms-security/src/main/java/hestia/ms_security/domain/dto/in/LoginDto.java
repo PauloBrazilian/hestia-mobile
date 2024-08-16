@@ -15,8 +15,5 @@ public record LoginDto(
         @Size(min = 8, message = "Password should have at least 8 characters")
         String password
 
-//        @NotBlank(message = "roles must be either 'AUTHORIZED' or 'UNAUTHORIZED'")
-//        AuthorizationEnum access
-
 ) {
 }

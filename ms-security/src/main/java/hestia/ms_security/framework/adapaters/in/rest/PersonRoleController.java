@@ -16,13 +16,13 @@ public class PersonRoleController {
     private PersonServiceImpl serviceImpl;
 
     @GetMapping("/person")
-    public ResponseEntity<String> getPersons(){
+    public ResponseEntity<String> getPersons() {
         serviceImpl.getPersons();
         return new ResponseEntity<>("Successfully ", HttpStatus.OK);
     }
 
     @GetMapping("/business")
-    public ResponseEntity<String> getBusiness(){
+    public ResponseEntity<String> getBusiness() {
         serviceImpl.getBusiness();
         return new ResponseEntity<>("Successfully ", HttpStatus.OK);
     }

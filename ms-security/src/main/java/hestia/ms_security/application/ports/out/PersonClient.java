@@ -4,7 +4,10 @@ import hestia.ms_security.domain.dto.in.PersonDto;
 import jakarta.validation.Valid;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.FeignClientProperties;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,12 +27,5 @@ public interface PersonClient {
 
     @GetMapping(value = "/person/email/{email}", produces = "application/json")
     Optional<PersonDto> findByEmail(@PathVariable("email") String email);
-
-//
-//    @PutMapping(value = "/{personId}", produces = "application/json")
-//    PersonDto updatePerson(@PathVariable("personId") Long personId, @RequestBody PersonDto personDTO);
-//
-//    @DeleteMapping(value = "/{personId}", produces = "application/json")
-//    String deletePersonById(@PathVariable("personId") Long personId);
 
 }

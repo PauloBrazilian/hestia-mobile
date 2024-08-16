@@ -1,16 +1,14 @@
 package hestia.msStore.application.ports.in;
 
 import hestia.msStore.domain.dto.in.ListaDto;
-import hestia.msStore.domain.dto.in.ProductDto;
-import hestia.msStore.domain.model.Lista;
 import hestia.msStore.domain.dto.in.ListaResponse;
-import hestia.msStore.domain.model.Product;
+import hestia.msStore.domain.dto.in.ProductDto;
 
 import java.util.List;
 
 public interface ListaService {
 
-    List<ListaDto> findAllListas();
+    List<ListaDto> findAllListas(String personName);
 
     ListaDto findListaById(Long listaId);
 

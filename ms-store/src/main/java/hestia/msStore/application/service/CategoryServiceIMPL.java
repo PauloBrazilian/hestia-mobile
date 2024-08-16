@@ -1,12 +1,12 @@
 package hestia.msStore.application.service;
 
 import hestia.msStore.application.ports.in.CategoryService;
-import hestia.msStore.framework.exeptions.ProductAPIException;
-import hestia.msStore.framework.exeptions.ResourceNotFoundException;
 import hestia.msStore.domain.model.Category;
 import hestia.msStore.domain.model.Product;
 import hestia.msStore.framework.adapaters.out.CategoryRepository;
 import hestia.msStore.framework.adapaters.out.ProductRepository;
+import hestia.msStore.framework.exeptions.ProductAPIException;
+import hestia.msStore.framework.exeptions.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

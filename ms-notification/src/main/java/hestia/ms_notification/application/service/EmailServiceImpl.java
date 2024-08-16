@@ -11,7 +11,6 @@ import jakarta.mail.internet.MimeMessage;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -22,7 +21,6 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Base64;
 
 @AllArgsConstructor

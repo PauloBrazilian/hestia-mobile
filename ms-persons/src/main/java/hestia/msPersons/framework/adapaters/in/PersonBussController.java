@@ -1,7 +1,7 @@
 package hestia.msPersons.framework.adapaters.in;
 
-import hestia.msPersons.domain.dto.PersonBussDto;
 import hestia.msPersons.application.service.PersonBussServiceIMPL;
+import hestia.msPersons.domain.dto.PersonBussDto;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,12 +28,12 @@ public class PersonBussController {
     }
 
     @GetMapping("/name/{name}")
-    public ResponseEntity<List<PersonBussDto>> findAllPersonByName(@PathVariable("name") String name){
+    public ResponseEntity<List<PersonBussDto>> findAllPersonByName(@PathVariable("name") String name) {
         return new ResponseEntity<>(serviceImpl.findAllPersonByName(name), HttpStatus.OK);
     }
 
     @GetMapping("/email/{email}")
-    public ResponseEntity<Optional<PersonBussDto>> findByEmail(@PathVariable("email") String email){
+    public ResponseEntity<Optional<PersonBussDto>> findByEmail(@PathVariable("email") String email) {
         return new ResponseEntity<>(Optional.ofNullable(serviceImpl.findByEmail(email)), HttpStatus.OK);
     }
 

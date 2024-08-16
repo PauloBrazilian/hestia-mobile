@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class ListaNotFoundException extends RuntimeException{
+public class ListaNotFoundException extends RuntimeException {
 
     public ListaNotFoundException(String message, Throwable cause) {
         super(message, cause);

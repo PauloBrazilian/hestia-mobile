@@ -3,7 +3,6 @@ package hestia.msStore.framework.adapaters.in;
 
 import hestia.msStore.application.service.ProductServiceIMPL;
 import hestia.msStore.domain.dto.in.ProductDto;
-import hestia.msStore.domain.model.Product;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,14 +18,19 @@ public class ProductsController {
 
     private ProductServiceIMPL serviceIMPL;
 
+    @PostMapping("/creating")
+    public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto) {
+        return new ResponseEntity<>(serviceIMPL.createProduct(productDto), HttpStatus.CREATED);
+    }
+
     @GetMapping
     public ResponseEntity<List<ProductDto>> findAllProducts() {
         return new ResponseEntity<>(serviceIMPL.findAllProducts(), HttpStatus.OK);
     }
 
-    @PostMapping("/creating")
-    public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto) {
-        return new ResponseEntity<>(serviceIMPL.createProduct(productDto), HttpStatus.CREATED);
+    @GetMapping("/comparator/{productName}")
+    public ResponseEntity<List<ProductDto>> findProductsByName(@PathVariable(value = "productName") String productName) {
+        return new ResponseEntity<>(serviceIMPL.findAllProductsComparator(productName), HttpStatus.OK);
     }
 
     @GetMapping("/{productId}")

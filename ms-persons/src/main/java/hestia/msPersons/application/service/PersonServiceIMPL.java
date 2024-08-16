@@ -6,19 +6,16 @@ import hestia.msPersons.domain.dto.PersonDto;
 import hestia.msPersons.domain.dto.RoleDto;
 import hestia.msPersons.domain.entity.Person;
 import hestia.msPersons.domain.entity.Role;
-import hestia.msPersons.framework.exeptions.ProductAPIException;
 import hestia.msPersons.framework.adapaters.out.PersonRepository;
 import hestia.msPersons.framework.adapaters.out.RoleRespository;
+import hestia.msPersons.framework.exeptions.ProductAPIException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-
-import static java.util.stream.Collectors.toList;
 
 @AllArgsConstructor
 @Service
@@ -33,7 +30,7 @@ public class PersonServiceIMPL implements PersonService {
         return personRepository.findAll()
                 .stream()
                 .map(mapper::personToDto)
-                .collect(toList());
+                .toList();
     }
 
     @Override
@@ -53,7 +50,7 @@ public class PersonServiceIMPL implements PersonService {
         return personRepository.findAllPersonByName(name)
                 .stream()
                 .map(mapper::personToDto)
-                .collect(toList());
+                .toList();
     }
 
     @Override
@@ -68,7 +65,7 @@ public class PersonServiceIMPL implements PersonService {
 
         var existingRole = roleRepository.findByEmail(person.getEmail());
 
-        if (existingRole.equals(true)){
+        if (existingRole.equals(true)) {
             Role role = createRole(personDTO.getRoleDto());
             person.setRole(role);
         }

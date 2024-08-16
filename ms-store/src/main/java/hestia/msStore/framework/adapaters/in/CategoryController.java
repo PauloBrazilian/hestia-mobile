@@ -15,7 +15,6 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-//@PreAuthorize("hasRole('USER')")
 @RequestMapping("/category")
 public class CategoryController {
 

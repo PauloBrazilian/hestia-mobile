@@ -1,11 +1,11 @@
 package hestia.msStore.application.service;
 
 import hestia.msStore.application.ports.in.ListaService;
-import hestia.msStore.application.ports.out.AuthClient;
 import hestia.msStore.application.ports.out.PersonClient;
 import hestia.msStore.domain.dto.in.ListaDto;
 import hestia.msStore.domain.dto.in.ListaResponse;
 import hestia.msStore.domain.dto.in.ProductDto;
+import hestia.msStore.domain.dto.in.ProductResponse;
 import hestia.msStore.domain.dto.out.LoginDto;
 import hestia.msStore.domain.dto.out.PersonResponse;
 import hestia.msStore.domain.mapper.ClassMapper;
@@ -22,8 +22,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.*;
 
-import static java.util.stream.Collectors.toList;
-
 @AllArgsConstructor
 @Service
 public class ListaServiceIMPL implements ListaService {
@@ -34,11 +32,12 @@ public class ListaServiceIMPL implements ListaService {
     private final ClassMapper mapper;
 
     @Override
-    public List<ListaDto> findAllListas() {
-        return listaRepository.findAll()
-                .stream()
+    public List<ListaDto> findAllListas(String personName) {
+        var existingList = listaRepository.findAllByPersonName(personName);
+
+        return existingList.stream()
                 .map(mapper::listaToDto)
-                .collect(toList());
+                .toList();
     }
 
     @Override
@@ -56,17 +55,25 @@ public class ListaServiceIMPL implements ListaService {
         for (Product product : searchListas.getProducts()) {
             var productName = product.getProductName();
 
-            var listaResponse = new ListaResponse();
+            var listaResponse = productGroups.getOrDefault(productName, new ListaResponse());
             listaResponse.setListaName(productName);
-            var productResponse = mapper.responseToProduct(product);
 
+            var productResponse = mapper.responseToProduct(product);
             productResponse.setPrice(product.getPrice());
             productResponse.setQuantity(product.getQuantity());
             productResponse.setPersonBussName(product.getPersonBussName());
 
-            listaResponse.setProducts(new ArrayList<>(List.of(productResponse)));
+            if (listaResponse.getProducts() == null) {
+                listaResponse.setProducts(new ArrayList<>());
+            }
             listaResponse.getProducts().add(productResponse);
-            listaResponse.setTotal(product.getPrice().multiply(BigDecimal.valueOf(product.getQuantity())));
+
+            listaResponse.getProducts().sort(Comparator.comparing(ProductResponse::getPrice));
+
+            BigDecimal total = listaResponse.getTotal() != null ? listaResponse.getTotal() : BigDecimal.ZERO;
+            total = total.add(product.getPrice().multiply(BigDecimal.valueOf(product.getQuantity())));
+            listaResponse.setTotal(total);
+
             productGroups.put(productName, listaResponse);
         }
 
@@ -76,7 +83,7 @@ public class ListaServiceIMPL implements ListaService {
     @Override
     @Transactional
     public ListaDto createLista(ListaDto listaDto) {
-        var personResponseOpt = new PersonResponse(listaDto.getPersonName(), "", "secret");
+        var personResponseOpt = new PersonResponse(listaDto.getPersonName(), "secret", "secret");
 
         if (personResponseOpt.email().isEmpty()) {
             var lista = mapper.dtoToLista(listaDto);
@@ -112,13 +119,16 @@ public class ListaServiceIMPL implements ListaService {
         var existingList = listaRepository.findById(listaId).orElseThrow(
                 () -> new ResourceNotFoundException("Lista", "id", listaId));
 
-        var searchProduct = productRepository.findById(productId).orElseThrow(
-                () -> new ResourceNotFoundException("Product", "id", productId));
+        var searchProduct = productRepository.findById(productId);
 
-        System.out.println("Quantidade recebida no DTO: " + productDto.getQuantity());
+        if (searchProduct.isPresent()) {
+            var existingProduct = searchProduct.get();
+            var newProduct = defineProduct(existingProduct);
 
-        searchProduct.setQuantity(productDto.getQuantity());
-        existingList.getProducts().add(searchProduct);
+            newProduct.setQuantity(productDto.getQuantity());
+            productRepository.save(newProduct);
+            existingList.getProducts().add(newProduct);
+        }
 
         var savedLista = listaRepository.save(existingList);
         return mapper.listaToDto(savedLista);
@@ -138,7 +148,7 @@ public class ListaServiceIMPL implements ListaService {
         var existingList = listaRepository.findById(listaId).orElseThrow(
                 () -> new ResourceNotFoundException("Lista", "id", listaId));
 
-        Product searchProduct = productRepository.findById(productId)
+        var searchProduct = productRepository.findById(productId)
                 .orElseThrow(() -> new ResourceNotFoundException("Product", "id", productId));
 
         existingList.getProducts().remove(searchProduct);
@@ -158,5 +168,15 @@ public class ListaServiceIMPL implements ListaService {
         throw new RuntimeException("Not found Person");
     }
 
+    private Product defineProduct(Product product) {
+        var newProduct = new Product();
+        newProduct.setProductName(product.getProductName());
+        newProduct.setDescription(product.getDescription());
+        newProduct.setImgUrl(product.getImgUrl());
+        newProduct.setPrice(product.getPrice());
+        newProduct.setCategories(product.getCategories());
+        newProduct.setPersonBussName(product.getPersonBussName());
+        return newProduct;
+    }
 
 }

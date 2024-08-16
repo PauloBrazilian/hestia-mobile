@@ -1,7 +1,7 @@
 package hestia.msPersons.framework.adapaters.in;
 
-import hestia.msPersons.domain.dto.PersonDto;
 import hestia.msPersons.application.service.PersonServiceIMPL;
+import hestia.msPersons.domain.dto.PersonDto;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

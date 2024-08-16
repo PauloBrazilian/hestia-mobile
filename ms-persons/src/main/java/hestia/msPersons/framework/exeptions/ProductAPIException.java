@@ -12,7 +12,7 @@ public class ProductAPIException extends RuntimeException {
     private String message;
 
     public ProductAPIException(HttpStatus badRequest, String message) {
-        this.message =message;
-        this.status=status;
+        this.message = message;
+        this.status = status;
     }
 }

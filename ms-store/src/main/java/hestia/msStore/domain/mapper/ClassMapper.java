@@ -1,12 +1,11 @@
 package hestia.msStore.domain.mapper;
 
-import hestia.msStore.domain.model.Lista;
-import hestia.msStore.domain.model.Product;
 import hestia.msStore.domain.dto.in.ListaDto;
 import hestia.msStore.domain.dto.in.ProductDto;
 import hestia.msStore.domain.dto.in.ProductResponse;
+import hestia.msStore.domain.model.Lista;
+import hestia.msStore.domain.model.Product;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")

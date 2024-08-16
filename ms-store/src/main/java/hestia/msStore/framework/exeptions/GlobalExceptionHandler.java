@@ -26,7 +26,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
     public ResponseEntity<ErrorDetails> listaNotFoundException(ListaNotFoundException e, WebRequest webRequest) {
-        ErrorDetails errorDetails = new ErrorDetails(new Date(), e.getMessage(), webRequest.getDescription(false) );
+        ErrorDetails errorDetails = new ErrorDetails(new Date(), e.getMessage(), webRequest.getDescription(false));
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorDetails);
     }
 

@@ -1,10 +1,10 @@
 package hestia.msPersons.domain.config;
 
+import hestia.msPersons.domain.dto.PersonBussDto;
+import hestia.msPersons.domain.dto.PersonDto;
 import hestia.msPersons.domain.dto.RoleDto;
 import hestia.msPersons.domain.entity.Person;
 import hestia.msPersons.domain.entity.PersonBUSS;
-import hestia.msPersons.domain.dto.PersonBussDto;
-import hestia.msPersons.domain.dto.PersonDto;
 import hestia.msPersons.domain.entity.Role;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

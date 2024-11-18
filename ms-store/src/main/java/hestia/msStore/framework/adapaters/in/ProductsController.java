@@ -1,6 +1,5 @@
 package hestia.msStore.framework.adapaters.in;
 
-
 import hestia.msStore.application.service.ProductServiceIMPL;
 import hestia.msStore.domain.dto.in.ProductDto;
 import jakarta.validation.Valid;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @AllArgsConstructor
 @RestController
 @RequestMapping("/products")

@@ -24,10 +24,8 @@ public class AuthServiceImpl implements AuthService {
     private final PasswordEncoder passwordEncoder;
     private final TokenService tokenService;
 
-
     @Override
     public PersonResponse login(LoginDto loginDto) {
-
         var personOpt = personClient.findByEmail(loginDto.email());
         var personBussOpt = busClient.findByEmail(loginDto.email());
 
@@ -119,6 +117,5 @@ public class AuthServiceImpl implements AuthService {
             throw new RuntimeException("Person already exists");
         }
     }
-
 
 }

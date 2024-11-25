@@ -12,13 +12,13 @@ public class CorsConfig {
     @Bean
     public CorsWebFilter corsWebFilter() {
         CorsConfiguration config = new CorsConfiguration();
-        config.addAllowedOrigin("http://localhost:3000"); // Domínio do front-end
-        config.addAllowedMethod("*"); // Permite todos os métodos (GET, POST, etc.)
-        config.addAllowedHeader("*"); // Permite todos os cabeçalhos
-        config.setAllowCredentials(true); // Permite cookies
+        config.addAllowedOrigin("http://localhost:3000");
+        config.addAllowedMethod("*");
+        config.addAllowedHeader("*");
+        config.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config); // Aplica a todas as rotas
+        source.registerCorsConfiguration("/**", config);
 
         return new CorsWebFilter(source);
     }
